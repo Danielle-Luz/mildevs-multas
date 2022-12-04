@@ -1,7 +1,5 @@
 package br.com.mildevs.model;
 
-import java.util.List;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,72 +8,77 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import java.util.List;
 
 @Entity
 public class Veiculo {
-  @Id
-  @Column(length = 7)
-  String placa;
-  int ano;
-  @Column(length = 30)
-  String modelo;
-  @Column(length = 30)
-  String marca;
-  @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST, optional = false)
-  @JoinColumn(name = "fk_condutor", referencedColumnName = "numeroCnh")
-  Condutor condutor;
-  @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "veiculoMultado")
-  List<Multa> multas;
 
-  public Veiculo() {
+    @Id
+    @Column(length = 7)
+    private String placa;
 
-  }
+    private int ano;
 
-  public String getPlaca() {
-    return placa;
-  }
+    @Column(length = 30)
+    private String modelo;
 
-  public void setPlaca(String placa) {
-    this.placa = placa;
-  }
+    @Column(length = 30)
+    private String marca;
 
-  public int getAno() {
-    return ano;
-  }
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST, optional = false)
+    @JoinColumn(name = "fk_condutor", referencedColumnName = "numeroCnh")
+    private Condutor condutor;
 
-  public void setAno(int ano) {
-    this.ano = ano;
-  }
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "veiculoMultado")
+    private List<Multa> multas;
 
-  public String getModelo() {
-    return modelo;
-  }
+    public Veiculo() {}
 
-  public void setModelo(String modelo) {
-    this.modelo = modelo;
-  }
+    public String getPlaca() {
+        return placa;
+    }
 
-  public String getMarca() {
-    return marca;
-  }
+    public void setPlaca(String placa) {
+        this.placa = placa;
+    }
 
-  public void setMarca(String marca) {
-    this.marca = marca;
-  }
+    public int getAno() {
+        return ano;
+    }
 
-  public Condutor getCondutor() {
-    return condutor;
-  }
+    public void setAno(int ano) {
+        this.ano = ano;
+    }
 
-  public void setCondutor(Condutor condutor) {
-    this.condutor = condutor;
-  }
+    public String getModelo() {
+        return modelo;
+    }
 
-  public List<Multa> getMultas() {
-    return multas;
-  }
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
 
-  public void setMultas(List<Multa> multas) {
-    this.multas = multas;
-  }
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public Condutor getCondutor() {
+        return condutor;
+    }
+
+    public void setCondutor(Condutor condutor) {
+        this.condutor = condutor;
+    }
+
+    public List<Multa> getMultas() {
+        return multas;
+    }
+
+    public void setMultas(List<Multa> multas) {
+        this.multas = multas;
+    }
 }
