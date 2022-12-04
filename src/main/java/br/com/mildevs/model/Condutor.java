@@ -4,9 +4,11 @@ import java.time.LocalDate;
 import java.util.List;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
+@Entity
 public class Condutor {
   @Id
   @Column(name = "numero_cnh")
