@@ -3,8 +3,10 @@ package br.com.mildevs.model;
 import java.time.LocalDate;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
@@ -15,10 +17,11 @@ public class Condutor {
   private int numeroCnh;
   @Column(name = "data_emissao_cnh")
   private LocalDate dataEmissaoCnh;
-  @Column(name = "orgao_emissor", length = 5)
+  @Column(name = "orgao_emissor", length = 5, nullable = false)
   private String orgaoEmissor;
+  @Column(nullable = false)
   private int pontuacao;
-  @OneToMany(mappedBy = "condutor")
+  @OneToMany(mappedBy = "condutor", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
   private List<Veiculo> veiculos;
 
   public Condutor() {
