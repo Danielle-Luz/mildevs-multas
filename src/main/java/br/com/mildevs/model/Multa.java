@@ -11,15 +11,55 @@ import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Multa {
-  @Id
-  @GeneratedValue
-  @Column(name = "codigo_multa")
-  private int codigoMulta;
-  @Column(nullable = false)
-  private double valor;
-  @Column(nullable = false)
-  private int pontuacao;
-  @JoinColumn(name = "fk_veiculo", referencedColumnName = "placa")
-  @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST, optional = false)
-  private Veiculo veiculoMultado;
+
+    @Id
+    @GeneratedValue
+    @Column(name = "codigo_multa")
+    private int codigoMulta;
+
+    @Column(nullable = false)
+    private double valor;
+
+    @Column(nullable = false)
+    private int pontuacao;
+
+    @JoinColumn(name = "fk_veiculo", referencedColumnName = "placa")
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST, optional = false)
+    private Veiculo veiculoMultado;
+
+    public Multa() {
+      
+    }
+
+    public int getCodigoMulta() {
+        return codigoMulta;
+    }
+
+    public void setCodigoMulta(int codigoMulta) {
+        this.codigoMulta = codigoMulta;
+    }
+
+    public double getValor() {
+        return valor;
+    }
+
+    public void setValor(double valor) {
+        this.valor = valor;
+    }
+
+    public int getPontuacao() {
+        return pontuacao;
+    }
+
+    public void setPontuacao(int pontuacao) {
+        this.pontuacao = pontuacao;
+    }
+
+    public Veiculo getVeiculoMultado() {
+        return veiculoMultado;
+    }
+
+    public void setVeiculoMultado(Veiculo veiculoMultado) {
+        this.veiculoMultado = veiculoMultado;
+    }
 }
