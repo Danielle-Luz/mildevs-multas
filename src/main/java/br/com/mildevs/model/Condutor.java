@@ -18,4 +18,49 @@ public class Condutor {
   private int pontuacao;
   @OneToMany(mappedBy = "condutor")
   private List<Veiculo> veiculos;
+
+  public Condutor() {
+
+  }
+
+  public int getNumeroCnh() {
+    return numeroCnh;
+  }
+
+  public void setNumeroCnh(int numeroCnh) {
+    this.numeroCnh = numeroCnh;
+  }
+
+  public LocalDate getDataEmissaoCnh() {
+    return dataEmissaoCnh;
+  }
+
+  public void setDataEmissaoCnh(LocalDate dataEmissaoCnh) {
+    this.dataEmissaoCnh = dataEmissaoCnh;
+  }
+
+  public String getOrgaoEmissor() {
+    return orgaoEmissor;
+  }
+
+  public void setOrgaoEmissor(String orgaoEmissor) {
+    this.orgaoEmissor = orgaoEmissor;
+  }
+
+  public int getPontuacao() {
+    return pontuacao;
+  }
+
+  public void setPontuacao(int pontuacao) {
+    this.pontuacao = pontuacao;
+  }
+
+  public List<Veiculo> getVeiculos() {
+    return veiculos;
+  }
+
+  public void setVeiculos(List<Veiculo> veiculos) {
+    this.veiculos = veiculos;
+  }
+  
 }
