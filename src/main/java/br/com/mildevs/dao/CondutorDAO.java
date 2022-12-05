@@ -89,20 +89,4 @@ public class CondutorDAO {
 
         entityManager.close();
     }
-
-    public static void registrarVeiculo(Condutor condutor, Veiculo veiculo) throws RegistroJaInseridoException {
-      boolean veiculoJaInserido = condutor.getVeiculos().contains(veiculo);
-
-      if(veiculoJaInserido){
-        throw new RegistroJaInseridoException("O condutor já possui esse veículo");
-      }
-
-      condutor.getVeiculos().add(veiculo);
-
-      veiculo.setCondutor(condutor);
-
-      atualizarCondutor(condutor);
-
-      VeiculoDAO.atualizarVeiculo(veiculo);
-    }
 }
