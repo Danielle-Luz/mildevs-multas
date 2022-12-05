@@ -3,7 +3,6 @@ package br.com.mildevs.dao;
 import java.time.LocalDate;
 import java.util.List;
 
-import br.com.mildevs.exceptions.RegistroJaInseridoException;
 import br.com.mildevs.model.Condutor;
 import br.com.mildevs.model.Veiculo;
 import jakarta.persistence.EntityManager;
