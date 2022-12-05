@@ -12,7 +12,11 @@ public class CondutorDAO {
     public static void inserirCondutor(Condutor novoCondutor) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
+        entityManager.getTransaction().begin();
+
         entityManager.persist(novoCondutor);
+
+        entityManager.getTransaction().commit();
 
         entityManager.close();
     }
@@ -20,13 +24,21 @@ public class CondutorDAO {
     public static Condutor consultarCondutor(int numeroCnh) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
+        entityManager.getTransaction().begin();
+
         Condutor condutorEncontrado = entityManager.find(Condutor.class, numeroCnh);
+
+        entityManager.getTransaction().commit();
+
+        entityManager.close();
 
         return condutorEncontrado;
     }
 
     public static boolean removerCondutor(int numeroCnh) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+        entityManager.getTransaction().begin();
 
         Condutor condutorEncontrado = consultarCondutor(numeroCnh);
 
@@ -36,12 +48,22 @@ public class CondutorDAO {
 
         entityManager.remove(condutorEncontrado);
 
+        entityManager.getTransaction().commit();
+
+        entityManager.close();
+
         return true;
     }
-    
-    public static void atualizarCondutor (Condutor condutorAtualizado) {
-      EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-      entityManager.merge(condutorAtualizado);
+    public static void atualizarCondutor(Condutor condutorAtualizado) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+        entityManager.getTransaction().begin();
+
+        entityManager.merge(condutorAtualizado);
+
+        entityManager.getTransaction().commit();
+
+        entityManager.close();
     }
 }
