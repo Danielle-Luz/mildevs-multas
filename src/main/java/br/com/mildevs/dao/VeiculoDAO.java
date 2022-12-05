@@ -34,4 +34,24 @@ public class VeiculoDAO {
 
         return veiculoEncontrado;
     }
+
+    public static boolean removerVeiculo (String placa) {
+      Veiculo veiculoEncontrado = consultarVeiculo(placa);
+
+      if (veiculoEncontrado == null) {
+        return false;
+      }
+
+      EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+      entityManager.getTransaction().begin();
+
+      entityManager.remove(veiculoEncontrado);
+
+      entityManager.getTransaction().commit();
+
+      entityManager.close();
+
+      return true;
+    }
 }
