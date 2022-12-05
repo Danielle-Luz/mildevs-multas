@@ -15,4 +15,28 @@ public class CondutorDAO {
 
     entityManager.close();
   }
+
+  public static Condutor consultarCondutor (int numeroCnh) {
+    EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+    Condutor condutorEncontrado = entityManager.find(Condutor.class, numeroCnh);
+
+    return condutorEncontrado;
+  }
+
+ public static boolean removerCondutor (int numeroCnh) {
+  EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+  Condutor condutorEncontrado = consultarCondutor(numeroCnh);
+
+  if (condutorEncontrado == null) {
+    return false;
+  }
+
+  entityManager.remove(condutorEncontrado);
+
+  return true;
+ } 
+
+ 
 }
