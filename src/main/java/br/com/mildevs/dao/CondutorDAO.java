@@ -1,6 +1,7 @@
 package br.com.mildevs.dao;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import br.com.mildevs.exceptions.RegistroJaInseridoException;
 import br.com.mildevs.model.Condutor;
@@ -37,6 +38,24 @@ public class CondutorDAO {
         entityManager.close();
 
         return condutorEncontrado;
+    }
+
+    public static List<Veiculo> exibirVeiculos(int numeroCnh) {
+      EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+      entityManager.getTransaction().begin();
+
+      Condutor condutorEncontrado = entityManager.find(Condutor.class, numeroCnh);
+
+      List<Veiculo> listaCarros = condutorEncontrado.getVeiculos();
+
+      listaCarros.size();
+
+      entityManager.getTransaction().commit();
+
+      entityManager.close();
+
+      return listaCarros;
     }
 
     public static boolean removerCondutor(int numeroCnh) {
