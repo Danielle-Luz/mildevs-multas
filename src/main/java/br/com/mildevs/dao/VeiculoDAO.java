@@ -6,17 +6,32 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
 public class VeiculoDAO {
-  private static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("mildevs-multas");
 
-  public static void inserirVeiculo (Veiculo novoVeiculo) {
-    EntityManager entityManager = entityManagerFactory.createEntityManager();
+    private static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("mildevs-multas");
 
-    entityManager.getTransaction().begin();
+    public static void inserirVeiculo(Veiculo novoVeiculo) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-    entityManager.persist(novoVeiculo);
+        entityManager.getTransaction().begin();
 
-    entityManager.getTransaction().commit();
+        entityManager.persist(novoVeiculo);
 
-    entityManager.close();
-  }
+        entityManager.getTransaction().commit();
+
+        entityManager.close();
+    }
+
+    public static Veiculo consultarVeiculo(String placa) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+        entityManager.getTransaction().begin();
+
+        Veiculo veiculoEncontrado = entityManager.find(Veiculo.class, placa);
+
+        entityManager.getTransaction().commit();
+
+        entityManager.close();
+
+        return veiculoEncontrado;
+    }
 }
