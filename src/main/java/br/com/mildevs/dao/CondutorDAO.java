@@ -6,37 +6,42 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
 public class CondutorDAO {
-  private static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("mildevs-multas");
 
-  public static void inserirCondutor (Condutor novoCondutor) {
-    EntityManager entityManager = entityManagerFactory.createEntityManager();
+    private static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("mildevs-multas");
 
-    entityManager.persist(novoCondutor);
+    public static void inserirCondutor(Condutor novoCondutor) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-    entityManager.close();
-  }
+        entityManager.persist(novoCondutor);
 
-  public static Condutor consultarCondutor (int numeroCnh) {
-    EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.close();
+    }
 
-    Condutor condutorEncontrado = entityManager.find(Condutor.class, numeroCnh);
+    public static Condutor consultarCondutor(int numeroCnh) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-    return condutorEncontrado;
-  }
+        Condutor condutorEncontrado = entityManager.find(Condutor.class, numeroCnh);
 
- public static boolean removerCondutor (int numeroCnh) {
-  EntityManager entityManager = entityManagerFactory.createEntityManager();
+        return condutorEncontrado;
+    }
 
-  Condutor condutorEncontrado = consultarCondutor(numeroCnh);
+    public static boolean removerCondutor(int numeroCnh) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-  if (condutorEncontrado == null) {
-    return false;
-  }
+        Condutor condutorEncontrado = consultarCondutor(numeroCnh);
 
-  entityManager.remove(condutorEncontrado);
+        if (condutorEncontrado == null) {
+            return false;
+        }
 
-  return true;
- } 
+        entityManager.remove(condutorEncontrado);
 
- 
+        return true;
+    }
+    
+    public static void alterarCondutor (Condutor condutorAlterado) {
+      EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+      entityManager.merge(condutorAlterado);
+    }
 }
