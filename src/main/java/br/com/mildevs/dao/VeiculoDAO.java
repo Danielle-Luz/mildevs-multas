@@ -7,39 +7,39 @@ import jakarta.persistence.Persistence;
 
 public class VeiculoDAO {
 
-    private static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("mildevs-multas");
+  private static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("mildevs-multas");
 
-    public static void inserirVeiculo(Veiculo novoVeiculo) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
+  public static void inserirVeiculo(Veiculo novoVeiculo) {
+      EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-        entityManager.getTransaction().begin();
+      entityManager.getTransaction().begin();
 
-        entityManager.persist(novoVeiculo);
+      entityManager.persist(novoVeiculo);
 
-        entityManager.getTransaction().commit();
+      entityManager.getTransaction().commit();
 
-        entityManager.close();
-    }
+      entityManager.close();
+  }
 
-    public static Veiculo consultarVeiculo(String placa) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
+  public static Veiculo consultarVeiculo(String placa) {
+      EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-        entityManager.getTransaction().begin();
+      entityManager.getTransaction().begin();
 
-        Veiculo veiculoEncontrado = entityManager.find(Veiculo.class, placa);
+      Veiculo veiculoEncontrado = entityManager.find(Veiculo.class, placa);
 
-        entityManager.getTransaction().commit();
+      entityManager.getTransaction().commit();
 
-        entityManager.close();
+      entityManager.close();
 
-        return veiculoEncontrado;
-    }
+      return veiculoEncontrado;
+  }
 
-    public static boolean removerVeiculo (String placa) {
+  public static boolean removerVeiculo(String placa) {
       Veiculo veiculoEncontrado = consultarVeiculo(placa);
 
       if (veiculoEncontrado == null) {
-        return false;
+          return false;
       }
 
       EntityManager entityManager = entityManagerFactory.createEntityManager();
@@ -53,5 +53,17 @@ public class VeiculoDAO {
       entityManager.close();
 
       return true;
-    }
+  }
+
+  public static void atualizarVeiculo(Veiculo veiculoAtualizado) {
+      EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+      entityManager.getTransaction().begin();
+
+      entityManager.merge(veiculoAtualizado);
+
+      entityManager.getTransaction().commit();
+
+      entityManager.close();
+  }
 }
