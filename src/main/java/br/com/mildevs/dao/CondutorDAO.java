@@ -39,9 +39,9 @@ public class CondutorDAO {
         return true;
     }
     
-    public static void alterarCondutor (Condutor condutorAlterado) {
+    public static void atualizarCondutor (Condutor condutorAtualizado) {
       EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-      entityManager.merge(condutorAlterado);
+      entityManager.merge(condutorAtualizado);
     }
 }
