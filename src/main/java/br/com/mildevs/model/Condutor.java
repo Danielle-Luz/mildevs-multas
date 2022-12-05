@@ -19,7 +19,7 @@ public class Condutor {
     @Column(name = "data_emissao_cnh")
     private LocalDate dataEmissaoCnh;
 
-    @Column(name = "orgao_emissor", length = 5, nullable = false)
+    @Column(name = "orgao_emissor", length = 10, nullable = false)
     private String orgaoEmissor;
 
     @Column(nullable = false)

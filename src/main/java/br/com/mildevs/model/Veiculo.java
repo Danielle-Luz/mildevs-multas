@@ -26,7 +26,7 @@ public class Veiculo {
     private String marca;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST, optional = false)
-    @JoinColumn(name = "fk_condutor", referencedColumnName = "numeroCnh")
+    @JoinColumn(name = "fk_condutor", referencedColumnName = "numero_cnh")
     private Condutor condutor;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "veiculoMultado")

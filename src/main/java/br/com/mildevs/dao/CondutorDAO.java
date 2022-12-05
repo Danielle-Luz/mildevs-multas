@@ -1,6 +1,10 @@
 package br.com.mildevs.dao;
 
+import java.time.LocalDate;
+
+import br.com.mildevs.exceptions.RegistroJaInseridoException;
 import br.com.mildevs.model.Condutor;
+import br.com.mildevs.model.Veiculo;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -40,7 +44,7 @@ public class CondutorDAO {
 
         entityManager.getTransaction().begin();
 
-        Condutor condutorEncontrado = consultarCondutor(numeroCnh);
+        Condutor condutorEncontrado = entityManager.find(Condutor.class, numeroCnh);
 
         if (condutorEncontrado == null) {
             return false;
@@ -65,5 +69,21 @@ public class CondutorDAO {
         entityManager.getTransaction().commit();
 
         entityManager.close();
+    }
+
+    public static void registrarVeiculo(Condutor condutor, Veiculo veiculo) throws RegistroJaInseridoException {
+      boolean veiculoJaInserido = condutor.getVeiculos().contains(veiculo);
+
+      if(veiculoJaInserido){
+        throw new RegistroJaInseridoException("O condutor já possui esse veículo");
+      }
+
+      condutor.getVeiculos().add(veiculo);
+
+      veiculo.setCondutor(condutor);
+
+      atualizarCondutor(condutor);
+
+      VeiculoDAO.atualizarVeiculo(veiculo);
     }
 }
