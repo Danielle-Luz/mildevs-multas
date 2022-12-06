@@ -144,6 +144,8 @@ public class Menu {
 
     System.out.println("Condutor registrado com sucesso.");
 
+    CondutorDAO.inserirCondutor(novoCondutor);
+
     return novoCondutor;
   }
 
