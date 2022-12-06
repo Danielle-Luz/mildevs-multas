@@ -36,7 +36,7 @@ public class Menu {
 
     switch(opcao) {
       case 1:
-
+        criarCondutor();
         break;
       case 2:
 
@@ -51,7 +51,7 @@ public class Menu {
 
     switch(opcao) {
       case 1:
-
+        criarMulta();
         break;
       case 2:
 
@@ -66,7 +66,7 @@ public class Menu {
 
     switch(opcao) {
       case 1:
-
+        criarCondutor();
         break;
       case 2:
 
