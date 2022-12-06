@@ -10,13 +10,13 @@ public class Menu {
 
     switch(opcao) {
       case 1:
-        
+        exibirMenuCondutor();
         break;
       case 2:
-        
+        exibirMenuMulta();
         break;
       case 3:
-        
+        exibirMenuVeiculo();
         break;
     }
   }
