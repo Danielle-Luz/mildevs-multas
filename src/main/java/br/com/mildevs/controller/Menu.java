@@ -1,7 +1,12 @@
 package br.com.mildevs.controller;
 
 import br.com.mildevs.Scanner.lerDados;
+import br.com.mildevs.dao.CondutorDAO;
+import br.com.mildevs.dao.MultaDAO;
+import br.com.mildevs.dao.VeiculoDAO;
 import br.com.mildevs.model.Condutor;
+import br.com.mildevs.model.Multa;
+import br.com.mildevs.model.Veiculo;
 
 import java.time.LocalDate;
 
@@ -69,6 +74,56 @@ public class Menu {
     }
   }
 
+
+  public static Condutor buscarCondutor(boolean buscarEmLoop) {
+    while(true) {
+      int cnh = lerDados.lerInt("Número da CNH: ");
+
+      Condutor condutorEncontrado = CondutorDAO.consultarCondutor(cnh);
+
+      if (condutorEncontrado == null) {
+        System.out.println("Condutor não encontrado");
+
+        if (buscarEmLoop) continue;
+      }
+      
+      return condutorEncontrado;
+    }
+  }
+
+  public static Multa buscarMulta(boolean buscarEmLoop) {
+    while(true) {
+      int codigoMulta = lerDados.lerInt("Código da multa: ");
+
+      Multa multaEncontrada = MultaDAO.consultarMulta(codigoMulta);
+
+      if (multaEncontrada == null) {
+        System.out.println("Multa não encontrada");
+
+        if (buscarEmLoop) continue;
+      }
+      
+      return multaEncontrada;
+    }
+  }
+
+  public static Veiculo buscarVeiculo(boolean buscarEmLoop) {
+    while(true) {
+      String placa = lerDados.lerString(7, "Placa do veículo: ");
+
+      Veiculo veiculoEncontrado = VeiculoDAO.consultarVeiculo(placa);
+
+      if (veiculoEncontrado == null) {
+        System.out.println("Veículo não encontrado");
+
+        if (buscarEmLoop) continue;
+      }
+      
+      return veiculoEncontrado;
+    }
+  }
+
+
   public static Condutor criarCondutor() {
     int numeroCnh = lerDados.lerInt("Número da CNH: ");
 
@@ -88,5 +143,11 @@ public class Menu {
     novoCondutor.setDataEmissaoCnh(LocalDate.of(ano, mes, dia));
 
     return novoCondutor;
+  }
+
+  public static Multa criarMulta() {
+    double valor = lerDados.lerDouble("Valor da multa: ");
+    int pontuacao = lerDados.lerInt("Pontuação reduzida da CNH: ");
+
   }
 }
