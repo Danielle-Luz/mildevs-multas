@@ -20,4 +20,22 @@ public class Menu {
         break;
     }
   }
+
+  public static void exibirMenuCondutor() {
+    String textoMenuGenerico = "Escolha uma opção:\n1- Inserir condutor\n2- Consultar condutor\n 3- Exibir veículos\n4- Remover condutor\n5- Atualizar condutor";
+
+    int opcao = lerDados.lerIntComLimites(textoMenuGenerico, 1, 5);
+
+    switch(opcao) {
+      case 1:
+
+        break;
+      case 2:
+
+        break;
+      case 3:
+
+        break;
+    }
+  }
 }
