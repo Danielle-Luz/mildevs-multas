@@ -7,7 +7,7 @@ public class lerDados {
     while(true) {
       Scanner scan = new Scanner(System.in);
 
-      System.out.println(mensagem);
+      System.out.print(mensagem);
 
       String valor = scan.nextLine();
 
@@ -24,7 +24,7 @@ public class lerDados {
       Scanner scan = new Scanner(System.in);
 
       try {
-        System.out.println(mensagem);
+        System.out.print(mensagem);
         
         double valor = scan.nextDouble();
 
@@ -40,7 +40,7 @@ public class lerDados {
       Scanner scan = new Scanner(System.in);
 
       try {
-        System.out.println(mensagem);
+        System.out.print(mensagem);
         
         int valor = scan.nextInt();
 

@@ -1,6 +1,9 @@
 package br.com.mildevs.controller;
 
 import br.com.mildevs.Scanner.lerDados;
+import br.com.mildevs.model.Condutor;
+
+import java.time.LocalDate;
 
 public class Menu {
   public static void exibirMenuGenerico() {
@@ -64,5 +67,26 @@ public class Menu {
 
         break;
     }
+  }
+
+  public static Condutor criarCondutor() {
+    int numeroCnh = lerDados.lerInt("Número da CNH: ");
+
+    int dia = lerDados.lerInt("Dia de emissão da CNH: ");
+    int mes = lerDados.lerInt("Mês de emissão da CNH: ");
+    int ano = lerDados.lerInt("Ano de emissão da CNH: ");
+
+    String orgaoEmissor = lerDados.lerString(10, "Orgão emissor da CNH: ");
+
+    int pontuacao = lerDados.lerInt("Pontuação atual da CNH: ");
+
+    Condutor novoCondutor = new Condutor();
+
+    novoCondutor.setNumeroCnh(numeroCnh);
+    novoCondutor.setOrgaoEmissor(orgaoEmissor);
+    novoCondutor.setPontuacao(pontuacao);
+    novoCondutor.setDataEmissaoCnh(LocalDate.of(ano, mes, dia));
+
+    return novoCondutor;
   }
 }
