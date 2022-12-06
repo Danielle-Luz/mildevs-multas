@@ -145,20 +145,20 @@ public class Menu {
     return novoCondutor;
   }
 
-  public static Multa criarMulta() {
+  public static void criarMulta() {
     double valor = lerDados.lerDouble("Valor da multa: ");
     int pontuacao = lerDados.lerInt("Pontuação reduzida da CNH: ");
 
-    Condutor condutor = null;
+    Veiculo veiculo = null;
 
-    while(condutor == null) {
-      condutor = buscarCondutor(false);
+    while(veiculo == null) {
+      veiculo = buscarVeiculo(false);
 
-      if (condutor == null) {
-        int opcao = lerDados.lerIntComLimites("Deseja cadastrar um condutor?\n1- Sim\n2- Não", 1, 2);
+      if (veiculo == null) {
+        int opcao = lerDados.lerIntComLimites("Deseja cadastrar um veiculo?\n1- Sim\n2- Não", 1, 2);
 
         if (opcao == 1) {
-          condutor = criarCondutor();
+          veiculo = criarVeiculo();
         }
       }
     }
@@ -167,7 +167,15 @@ public class Menu {
 
     novaMulta.setValor(valor);
     novaMulta.setPontuacao(pontuacao);
-    novaMulta.se
+    novaMulta.setVeiculoMultado(veiculo);
+
+    veiculo.getCondutor().setPontuacao(veiculo.getCondutor().getPontuacao() - pontuacao);
+
+    veiculo.getCondutor().getVeiculos().add(veiculo);
+
+    veiculo.getMultas().add(novaMulta);
+
+    CondutorDAO.atualizarCondutor(veiculo.getCondutor());
   }
 
   public static Veiculo criarVeiculo() {
