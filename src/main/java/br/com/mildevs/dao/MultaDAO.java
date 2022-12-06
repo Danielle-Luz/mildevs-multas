@@ -53,4 +53,16 @@ public class MultaDAO {
 
     return true;
   }
+
+  public static void atualizarMulta(Multa multaAtualizada) {
+    EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+    entityManager.getTransaction().begin();
+
+    entityManager.merge(multaAtualizada);
+
+    entityManager.getTransaction().commit();
+
+    entityManager.close();
+  }
 }
