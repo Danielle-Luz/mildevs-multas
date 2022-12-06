@@ -149,5 +149,55 @@ public class Menu {
     double valor = lerDados.lerDouble("Valor da multa: ");
     int pontuacao = lerDados.lerInt("Pontuação reduzida da CNH: ");
 
+    Condutor condutor = null;
+
+    while(condutor == null) {
+      condutor = buscarCondutor(false);
+
+      if (condutor == null) {
+        int opcao = lerDados.lerIntComLimites("Deseja cadastrar um condutor?\n1- Sim\n2- Não", 1, 2);
+
+        if (opcao == 1) {
+          condutor = criarCondutor();
+        }
+      }
+    }
+
+    Multa novaMulta = new Multa();
+
+    novaMulta.setValor(valor);
+    novaMulta.setPontuacao(pontuacao);
+    novaMulta.se
+  }
+
+  public static Veiculo criarVeiculo() {
+    String placa = lerDados.lerString(7, "Placa do veículo: ");
+    int ano = lerDados.lerInt("Ano do veículo: ");
+    String modelo = lerDados.lerString(30, "Modelo do veículo: ");
+    String marca = lerDados.lerString(30, "Marca do veículo: ");
+
+    Condutor condutor = null;
+
+    while(condutor == null) {
+      condutor = buscarCondutor(false);
+
+      if (condutor == null) {
+        int opcao = lerDados.lerIntComLimites("Deseja cadastrar um condutor?\n1- Sim\n2- Não", 1, 2);
+
+        if (opcao == 1) {
+          condutor = criarCondutor();
+        }
+      }
+    }
+
+    Veiculo novoVeiculo = new Veiculo();
+
+    novoVeiculo.setAno(ano);
+    novoVeiculo.setCondutor(condutor);
+    novoVeiculo.setMarca(marca);
+    novoVeiculo.setModelo(modelo);
+    novoVeiculo.setPlaca(placa);
+
+    return novoVeiculo;
   }
 }
