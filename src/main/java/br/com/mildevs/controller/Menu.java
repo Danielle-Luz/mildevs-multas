@@ -12,27 +12,31 @@ import java.time.LocalDate;
 
 public class Menu {
   public static void exibirMenuGenerico() {
-    String texto = "O que você deseja gerenciar?\n1- Condutor\n2- Multas\n 3-Veiculos";
-
-    int opcao = lerDados.lerIntComLimites(texto, 1, 3);
-
-    switch(opcao) {
-      case 1:
-        exibirMenuCondutor();
-        break;
-      case 2:
-        exibirMenuMulta();
-        break;
-      case 3:
-        exibirMenuVeiculo();
-        break;
+    while(true) {
+      String texto = "O que você deseja gerenciar?\n1- Condutor\n2- Multas\n3-Veiculos\n4- Sair";
+  
+      int opcao = lerDados.lerIntComLimites(texto, 1, 4);
+  
+      switch(opcao) {
+        case 1:
+          exibirMenuCondutor();
+          break;
+        case 2:
+          exibirMenuMulta();
+          break;
+        case 3:
+          exibirMenuVeiculo();
+          break;
+        case 4:
+          System.exit(0);
+      }
     }
   }
 
   public static void exibirMenuCondutor() {
-    String texto = "Escolha uma opção:\n1- Inserir condutor\n2- Consultar condutor";
+    String texto = "Escolha uma opção:\n1- Inserir condutor\n2- Consultar condutor\n3- Voltar";
 
-    int opcao = lerDados.lerIntComLimites(texto, 1, 2);
+    int opcao = lerDados.lerIntComLimites(texto, 1, 3);
 
     switch(opcao) {
       case 1:
@@ -41,13 +45,16 @@ public class Menu {
       case 2:
 
         break;
+      case 3:
+        exibirMenuGenerico();
+        break;
     }
   }
 
   public static void exibirMenuMulta() {
-    String texto = "Escolha uma opção:\n1- Inserir multa\n2- Consultar multa";
+    String texto = "Escolha uma opção:\n1- Inserir multa\n2- Consultar multa\n3- Voltar";
 
-    int opcao = lerDados.lerIntComLimites(texto, 1, 2);
+    int opcao = lerDados.lerIntComLimites(texto, 1, 3);
 
     switch(opcao) {
       case 1:
@@ -56,13 +63,16 @@ public class Menu {
       case 2:
 
         break;
+      case 3:
+        exibirMenuGenerico();
+        break;
     }
   }
 
   public static void exibirMenuVeiculo() {
-    String texto = "Escolha uma opção:\n1- Inserir veículo\n2- Consultar veículo";
+    String texto = "Escolha uma opção:\n1- Inserir veículo\n2- Consultar veículo\n3- Voltar";
 
-    int opcao = lerDados.lerIntComLimites(texto, 1, 2);
+    int opcao = lerDados.lerIntComLimites(texto, 1, 3);
 
     switch(opcao) {
       case 1:
@@ -70,6 +80,9 @@ public class Menu {
         break;
       case 2:
 
+        break;
+      case 3:
+        exibirMenuGenerico();
         break;
     }
   }
@@ -217,5 +230,9 @@ public class Menu {
     System.out.println("Veículo registrado com sucesso.");
 
     return novoVeiculo;
+  }
+
+  public static void main(String[] args) {
+    Menu.exibirMenuGenerico();
   }
 }
