@@ -34,4 +34,42 @@ public class lerDados {
       }
     }
   }
+
+  public static int lerInt(String mensagem) {
+    while(true) {
+      Scanner scan = new Scanner(System.in);
+
+      try {
+        System.out.println(mensagem);
+        
+        int valor = scan.nextInt();
+
+        return valor;
+      } catch (InputMismatchException e) {
+        System.out.println("Insira um valor inteiro válido");
+      }
+    }
+  }
+
+  public static int lerIntComLimites(String mensagem, int minimo, int maximo) {
+    while(true) {
+      Scanner scan = new Scanner(System.in);
+
+      try {
+        System.out.println(mensagem);
+        
+        int valor = scan.nextInt();
+
+        if (valor < minimo || valor >  maximo) {
+          System.out.printf("Valor inválido. Insira um valor entre %d e %d\n", minimo, maximo);
+
+          continue;
+        }
+
+        return valor;
+      } catch (InputMismatchException e) {
+        System.out.println("Insira um valor inteiro válido");
+      }
+    }
+  }
 }
