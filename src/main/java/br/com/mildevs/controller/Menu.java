@@ -142,6 +142,8 @@ public class Menu {
     novoCondutor.setPontuacao(pontuacao);
     novoCondutor.setDataEmissaoCnh(LocalDate.of(ano, mes, dia));
 
+    System.out.println("Condutor registrado com sucesso.");
+
     return novoCondutor;
   }
 
@@ -171,14 +173,14 @@ public class Menu {
 
     veiculo.getCondutor().setPontuacao(veiculo.getCondutor().getPontuacao() - pontuacao);
 
-    veiculo.getCondutor().getVeiculos().add(veiculo);
-
     veiculo.getMultas().add(novaMulta);
 
-    CondutorDAO.atualizarCondutor(veiculo.getCondutor());
+    VeiculoDAO.atualizarVeiculo(veiculo);
+
+    System.out.println("Multa registrada com sucesso.");
   }
 
-  public static void criarVeiculo() {
+  public static Veiculo criarVeiculo() {
     String placa = lerDados.lerString(7, "Placa do veículo: ");
     int ano = lerDados.lerInt("Ano do veículo: ");
     String modelo = lerDados.lerString(30, "Modelo do veículo: ");
@@ -209,5 +211,9 @@ public class Menu {
     condutor.getVeiculos().add(novoVeiculo);
 
     CondutorDAO.atualizarCondutor(condutor);
+
+    System.out.println("Veículo registrado com sucesso.");
+
+    return novoVeiculo;
   }
 }
