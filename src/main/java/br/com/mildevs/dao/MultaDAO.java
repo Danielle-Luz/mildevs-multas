@@ -30,7 +30,9 @@ public class MultaDAO {
     entityManager.getTransaction().commit();
 
     entityManager.close();
+
+    return multaEncontrada;
   }
 
-  }
+  
 }
