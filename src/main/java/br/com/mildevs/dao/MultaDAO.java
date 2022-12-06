@@ -19,4 +19,18 @@ public class MultaDAO {
 
     entityManager.close();
   }
+
+  public static Multa consultarMulta(int codigoMulta) {
+    EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+    entityManager.getTransaction().begin();
+
+    Multa multaEncontrada = entityManager.find(Multa.class, codigoMulta);
+
+    entityManager.getTransaction().commit();
+
+    entityManager.close();
+  }
+
+  }
 }
