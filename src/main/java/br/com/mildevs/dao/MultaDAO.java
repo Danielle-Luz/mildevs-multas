@@ -34,5 +34,23 @@ public class MultaDAO {
     return multaEncontrada;
   }
 
-  
+  public static boolean removerMulta(int codigoMulta) {
+    EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+    entityManager.getTransaction().begin();
+
+    Multa multaEncontrada = entityManager.find(Multa.class, codigoMulta);
+
+    if (multaEncontrada == null) {
+      return false;
+    }
+
+    entityManager.remove(multaEncontrada);
+
+    entityManager.getTransaction().commit();
+
+    entityManager.close();
+
+    return true;
+  }
 }
