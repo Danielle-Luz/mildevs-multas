@@ -1,5 +1,8 @@
 package br.com.mildevs.dao;
 
+import java.util.List;
+
+import br.com.mildevs.model.Multa;
 import br.com.mildevs.model.Veiculo;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -35,16 +38,34 @@ public class VeiculoDAO {
       return veiculoEncontrado;
   }
 
+  public static List<Multa> exibirMultas(int numeroCnh) {
+    EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+    entityManager.getTransaction().begin();
+
+    Veiculo veiculoEncontrado = entityManager.find(Veiculo.class, numeroCnh);
+
+    List<Multa> multas = veiculoEncontrado.getMultas();
+
+    multas.size();
+
+    entityManager.getTransaction().commit();
+
+    entityManager.close();
+
+    return multas;
+  }
+
   public static boolean removerVeiculo(String placa) {
-      Veiculo veiculoEncontrado = consultarVeiculo(placa);
+      EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+      entityManager.getTransaction().begin();
+      
+      Veiculo veiculoEncontrado = entityManager.find(Veiculo.class, placa);
 
       if (veiculoEncontrado == null) {
           return false;
       }
-
-      EntityManager entityManager = entityManagerFactory.createEntityManager();
-
-      entityManager.getTransaction().begin();
 
       entityManager.remove(veiculoEncontrado);
 
