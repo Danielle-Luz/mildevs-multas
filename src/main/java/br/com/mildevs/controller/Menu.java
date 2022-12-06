@@ -178,7 +178,7 @@ public class Menu {
     CondutorDAO.atualizarCondutor(veiculo.getCondutor());
   }
 
-  public static Veiculo criarVeiculo() {
+  public static void criarVeiculo() {
     String placa = lerDados.lerString(7, "Placa do veículo: ");
     int ano = lerDados.lerInt("Ano do veículo: ");
     String modelo = lerDados.lerString(30, "Modelo do veículo: ");
@@ -206,6 +206,8 @@ public class Menu {
     novoVeiculo.setModelo(modelo);
     novoVeiculo.setPlaca(placa);
 
-    return novoVeiculo;
+    condutor.getVeiculos().add(novoVeiculo);
+
+    CondutorDAO.atualizarCondutor(condutor);
   }
 }
