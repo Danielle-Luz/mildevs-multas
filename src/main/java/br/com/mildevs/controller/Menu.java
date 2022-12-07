@@ -111,7 +111,7 @@ public class Menu {
           System.out.println(condutorEncontrado);
           break;
         case 4:
-          List<Veiculo> listaVeiculos = condutorEncontrado.getVeiculos();
+          List<Veiculo> listaVeiculos = CondutorDAO.exibirVeiculos(condutorEncontrado.getNumeroCnh());
 
           for(Veiculo veiculo : listaVeiculos) {
             System.out.println(veiculo);
