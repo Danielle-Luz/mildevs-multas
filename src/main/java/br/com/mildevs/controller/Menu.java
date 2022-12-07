@@ -8,12 +8,28 @@ import br.com.mildevs.model.Condutor;
 import br.com.mildevs.model.Multa;
 import br.com.mildevs.model.Veiculo;
 
+import java.io.IOException;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Menu {
+  private static void limparTela() {
+    try {
+      if (System.getProperty("os.name").contains("Windows")) {
+          new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+      }
+      else {
+          System.out.print("\033\143");
+      }
+  } catch (IOException | InterruptedException ex) {}
+  }
+
   public static void exibirMenuGenerico() {
+    limparTela();
+
     while(true) {
       String texto = "O que você deseja gerenciar?\n1- Condutor\n2- Multas\n3-Veiculos\n4- Sair\n";
   
@@ -36,15 +52,21 @@ public class Menu {
   }
 
   public static void exibirMenuCondutor() {
+    limparTela();
+
     String texto = "Escolha uma opção:\n1- Inserir condutor\n2- Consultar condutor\n3- Voltar\n";
 
     int opcao = lerDados.lerIntComLimites(texto, 1, 3);
 
     switch(opcao) {
       case 1:
+        limparTela();
+
         criarCondutor();
         break;
       case 2:
+        limparTela();
+
         exibirMenuCondutorConsulta();
         break;
       case 3:
@@ -54,15 +76,21 @@ public class Menu {
   }
 
   public static void exibirMenuMulta() {
+    limparTela();
+
     String texto = "Escolha uma opção:\n1- Inserir multa\n2- Consultar multa\n3- Voltar\n";
 
     int opcao = lerDados.lerIntComLimites(texto, 1, 3);
 
     switch(opcao) {
       case 1:
+        limparTela();
+
         criarMulta();
         break;
       case 2:
+        limparTela();
+
         exibirMenuMultaConsulta();
         break;
       case 3:
@@ -72,15 +100,21 @@ public class Menu {
   }
 
   public static void exibirMenuVeiculo() {
+    limparTela();
+
     String texto = "Escolha uma opção:\n1- Inserir veículo\n2- Consultar veículo\n3- Voltar\n";
 
     int opcao = lerDados.lerIntComLimites(texto, 1, 3);
 
     switch(opcao) {
       case 1:
+        limparTela();
+
         criarVeiculo();
         break;
       case 2:
+        limparTela();
+
         exibirMenuVeiculoConsulta();
         break;
       case 3:
@@ -100,17 +134,25 @@ public class Menu {
   
       switch(opcao) {
         case 1:
+          limparTela();
+          
           CondutorDAO.removerCondutor(condutorEncontrado.getNumeroCnh());
   
           System.out.println("Condutor removido com sucesso.");
           break;
         case 2:
-  
-        break;
+          limparTela();
+
+          break;
         case 3:
+          limparTela();
+
           System.out.println(condutorEncontrado);
+
           break;
         case 4:
+          limparTela();
+
           List<Veiculo> listaVeiculos = CondutorDAO.exibirVeiculos(condutorEncontrado.getNumeroCnh());
 
           if (listaVeiculos.size() == 0) {
@@ -143,17 +185,25 @@ public class Menu {
   
       switch(opcao) {
         case 1:
+          limparTela();
+
           VeiculoDAO.removerVeiculo(veiculoEncontrado.getPlaca());
   
           System.out.println("Veículo removido com sucesso.");
           break;
         case 2:
-  
+        limparTela();
+
         break;
         case 3:
+          limparTela();
+
           System.out.println(veiculoEncontrado);
+
           break;
         case 4:
+          limparTela();
+
           List<Multa> listaMultas = VeiculoDAO.exibirMultas(veiculoEncontrado.getPlaca());
 
           if (listaMultas.size() == 0) {
@@ -185,15 +235,21 @@ public class Menu {
   
       switch(opcao) {
         case 1:
+          limparTela();
+
           MultaDAO.removerMulta(multaEncontrada.getCodigoMulta());
   
           System.out.println("Multa removida com sucesso.");
           break;
         case 2:
-  
-        break;
+          limparTela();
+
+          break;
         case 3:
+          limparTela();
+
           System.out.println(multaEncontrada);
+
           break;
         case 4:
           break menu;
@@ -394,6 +450,8 @@ public class Menu {
   }
 
   public static void main(String[] args) {
+    Logger.getLogger("org.hibernate").setLevel(Level.OFF);
+
     Menu.exibirMenuGenerico();
   }
 }
