@@ -10,6 +10,7 @@ import br.com.mildevs.model.Veiculo;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.util.List;
 
 public class Menu {
   public static void exibirMenuGenerico() {
@@ -77,7 +78,7 @@ public class Menu {
 
     switch(opcao) {
       case 1:
-        criarCondutor();
+        criarVeiculo();
         break;
       case 2:
 
@@ -155,7 +156,23 @@ public class Menu {
   }
 
   public static Condutor criarCondutor() {
-    int numeroCnh = lerDados.lerInt("Número da CNH: ");
+    int numeroCnh;
+
+    while (true) {
+      numeroCnh = lerDados.lerInt("Número da CNH: ");
+      
+      Condutor condutorEncontrado = CondutorDAO.consultarCondutor(numeroCnh);
+
+      if(condutorEncontrado == null) {
+        break;
+      }
+      
+      int opcao = lerDados.lerIntComLimites("CNH já registrada. Deseja inserir outra CNH ou retornar o encontrado?\n1- Inserir nova CNH\n2- Retornar o encontrado\n", 1, 2);
+
+      if (opcao == 2) return condutorEncontrado;
+    }
+
+
     LocalDate dataEmissao = lerDataEmissaoCnh();
     
     String orgaoEmissor = lerDados.lerString(10, "Orgão emissor da CNH: ");
@@ -169,9 +186,9 @@ public class Menu {
     novoCondutor.setPontuacao(pontuacao);
     novoCondutor.setDataEmissaoCnh(dataEmissao);
 
-    System.out.println("Condutor registrado com sucesso.");
-
     CondutorDAO.inserirCondutor(novoCondutor);
+    
+    System.out.println("Condutor registrado com sucesso.");
 
     return novoCondutor;
   }
@@ -202,7 +219,13 @@ public class Menu {
 
     veiculo.getCondutor().setPontuacao(veiculo.getCondutor().getPontuacao() - pontuacao);
 
-    veiculo.getMultas().add(novaMulta);
+    List<Multa> listaMultas = VeiculoDAO.exibirMultas(veiculo.getPlaca());
+
+    listaMultas.add(novaMulta);
+
+    veiculo.setMultas(listaMultas);
+
+    MultaDAO.inserirMulta(novaMulta);
 
     VeiculoDAO.atualizarVeiculo(veiculo);
 
@@ -210,7 +233,23 @@ public class Menu {
   }
 
   public static Veiculo criarVeiculo() {
-    String placa = lerDados.lerString(7, "Placa do veículo: ");
+    String placa;
+
+    while(true) {
+      placa = lerDados.lerString(7, "Placa do veículo: ");
+
+      Veiculo veiculoEncontrado = VeiculoDAO.consultarVeiculo(placa);
+
+      if(veiculoEncontrado == null) {
+        break;
+      }
+      
+      int opcao = lerDados.lerIntComLimites("Placa já registrada. Deseja inserir outra placa ou retornar o veículo encontrado?\n1- Inserir nova placa\n2- Retornar o encontrado\n", 1, 2);
+
+      if (opcao == 2) return veiculoEncontrado;
+    }
+
+
     int ano = lerDados.lerInt("Ano do veículo: ");
     String modelo = lerDados.lerString(30, "Modelo do veículo: ");
     String marca = lerDados.lerString(30, "Marca do veículo: ");
@@ -237,8 +276,14 @@ public class Menu {
     novoVeiculo.setModelo(modelo);
     novoVeiculo.setPlaca(placa);
 
-    condutor.getVeiculos().add(novoVeiculo);
+    List<Veiculo> listaVeiculos = CondutorDAO.exibirVeiculos(condutor.getNumeroCnh());
 
+    listaVeiculos.add(novoVeiculo);
+
+    condutor.setVeiculos(listaVeiculos);
+
+    VeiculoDAO.inserirVeiculo(novoVeiculo);
+    
     CondutorDAO.atualizarCondutor(condutor);
 
     System.out.println("Veículo registrado com sucesso.");

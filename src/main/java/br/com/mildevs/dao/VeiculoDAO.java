@@ -1,90 +1,89 @@
 package br.com.mildevs.dao;
 
-import java.util.List;
-
 import br.com.mildevs.model.Multa;
 import br.com.mildevs.model.Veiculo;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+import java.util.List;
 
 public class VeiculoDAO {
 
-  private static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("mildevs-multas");
+    private static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("mildevs-multas");
 
-  public static void inserirVeiculo(Veiculo novoVeiculo) {
-      EntityManager entityManager = entityManagerFactory.createEntityManager();
+    public static void inserirVeiculo(Veiculo novoVeiculo) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-      entityManager.getTransaction().begin();
+        entityManager.getTransaction().begin();
 
-      entityManager.persist(novoVeiculo);
+        entityManager.persist(novoVeiculo);
 
-      entityManager.getTransaction().commit();
+        entityManager.getTransaction().commit();
 
-      entityManager.close();
-  }
+        entityManager.close();
+    }
 
-  public static Veiculo consultarVeiculo(String placa) {
-      EntityManager entityManager = entityManagerFactory.createEntityManager();
+    public static Veiculo consultarVeiculo(String placa) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-      entityManager.getTransaction().begin();
+        entityManager.getTransaction().begin();
 
-      Veiculo veiculoEncontrado = entityManager.find(Veiculo.class, placa);
+        Veiculo veiculoEncontrado = entityManager.find(Veiculo.class, placa);
 
-      entityManager.getTransaction().commit();
+        entityManager.getTransaction().commit();
 
-      entityManager.close();
+        entityManager.close();
 
-      return veiculoEncontrado;
-  }
+        return veiculoEncontrado;
+    }
 
-  public static List<Multa> exibirMultas(int numeroCnh) {
-    EntityManager entityManager = entityManagerFactory.createEntityManager();
+    public static List<Multa> exibirMultas(String placa) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-    entityManager.getTransaction().begin();
+        entityManager.getTransaction().begin();
 
-    Veiculo veiculoEncontrado = entityManager.find(Veiculo.class, numeroCnh);
+        Veiculo veiculoEncontrado = entityManager.find(Veiculo.class, placa);
 
-    List<Multa> multas = veiculoEncontrado.getMultas();
+        List<Multa> multas = veiculoEncontrado.getMultas();
 
-    multas.size();
+        multas.size();
 
-    entityManager.getTransaction().commit();
+        entityManager.getTransaction().commit();
 
-    entityManager.close();
+        entityManager.close();
 
-    return multas;
-  }
+        return multas;
+    }
 
-  public static boolean removerVeiculo(String placa) {
-      EntityManager entityManager = entityManagerFactory.createEntityManager();
+    public static boolean removerVeiculo(String placa) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-      entityManager.getTransaction().begin();
-      
-      Veiculo veiculoEncontrado = entityManager.find(Veiculo.class, placa);
+        entityManager.getTransaction().begin();
 
-      if (veiculoEncontrado == null) {
-          return false;
-      }
+        Veiculo veiculoEncontrado = entityManager.find(Veiculo.class, placa);
 
-      entityManager.remove(veiculoEncontrado);
+        if (veiculoEncontrado == null) {
+            return false;
+        }
 
-      entityManager.getTransaction().commit();
+        entityManager.remove(veiculoEncontrado);
 
-      entityManager.close();
+        entityManager.getTransaction().commit();
 
-      return true;
-  }
+        entityManager.close();
 
-  public static void atualizarVeiculo(Veiculo veiculoAtualizado) {
-      EntityManager entityManager = entityManagerFactory.createEntityManager();
+        return true;
+    }
 
-      entityManager.getTransaction().begin();
+    public static void atualizarVeiculo(Veiculo veiculoAtualizado) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-      entityManager.merge(veiculoAtualizado);
+        entityManager.getTransaction().begin();
 
-      entityManager.getTransaction().commit();
+        entityManager.merge(veiculoAtualizado);
 
-      entityManager.close();
-  }
+        entityManager.getTransaction().commit();
+
+        entityManager.close();
+    }
 }

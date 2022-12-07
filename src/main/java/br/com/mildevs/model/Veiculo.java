@@ -27,7 +27,7 @@ public class Veiculo {
     @Column(length = 30)
     private String marca;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "fk_condutor", referencedColumnName = "numero_cnh")
     private Condutor condutor;
 
