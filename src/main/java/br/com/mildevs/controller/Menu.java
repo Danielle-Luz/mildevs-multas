@@ -93,70 +93,83 @@ public class Menu {
   public static void exibirMenuCondutorConsulta() {
     Condutor condutorEncontrado = buscarCondutor();
 
-    int opcao = lerDados.lerIntComLimites("Escolha uma opção:\n1- Excluir condutor\n2- Atualizar condutor\n3- Ver dados do condutor\n4- Voltar\n", 1, 4);
-
-    switch(opcao) {
-      case 1:
-        CondutorDAO.removerCondutor(condutorEncontrado.getNumeroCnh());
-
-        System.out.println("Condutor removido com sucesso.");
+    menu:
+    while (true) {
+      
+      int opcao = lerDados.lerIntComLimites("Escolha uma opção:\n1- Excluir condutor\n2- Atualizar condutor\n3- Ver dados do condutor\n4- Voltar\n", 1, 4);
+  
+      switch(opcao) {
+        case 1:
+          CondutorDAO.removerCondutor(condutorEncontrado.getNumeroCnh());
+  
+          System.out.println("Condutor removido com sucesso.");
+          break;
+        case 2:
+  
         break;
-      case 2:
-
-      break;
-      case 3:
-        System.out.println(condutorEncontrado);
-        break;
-      case 4:
-        exibirMenuGenerico();
-        break;
+        case 3:
+          System.out.println(condutorEncontrado);
+          break;
+        case 4:
+        break menu;
+      }
     }
+
+    exibirMenuGenerico();
   }
 
   public static void exibirMenuVeiculoConsulta() {
     Veiculo veiculoEncontrado = buscarVeiculo();
 
-    int opcao = lerDados.lerIntComLimites("Escolha uma opção:\n1- Excluir veículo\n2- Atualizar veículo\n3- Ver dados do veículo\n4- Voltar\n", 1, 4);
-
-    switch(opcao) {
-      case 1:
-        VeiculoDAO.removerVeiculo(veiculoEncontrado.getPlaca());
-
-        System.out.println("Veículo removido com sucesso.");
+    menu:
+    while(true) {
+      int opcao = lerDados.lerIntComLimites("Escolha uma opção:\n1- Excluir veículo\n2- Atualizar veículo\n3- Ver dados do veículo\n4- Voltar\n", 1, 4);
+  
+      switch(opcao) {
+        case 1:
+          VeiculoDAO.removerVeiculo(veiculoEncontrado.getPlaca());
+  
+          System.out.println("Veículo removido com sucesso.");
+          break;
+        case 2:
+  
         break;
-      case 2:
-
-      break;
-      case 3:
-        System.out.println(veiculoEncontrado);
-        break;
-      case 4:
-        exibirMenuGenerico();
-        break;
+        case 3:
+          System.out.println(veiculoEncontrado);
+          break;
+        case 4:
+          break menu;
+      }
+      
+      exibirMenuGenerico();
     }
   }
 
   public static void exibirMenuMultaConsulta() {
     Multa multaEncontrada = buscarMulta(true);
 
-    int opcao = lerDados.lerIntComLimites("Escolha uma opção:\n1- Excluir multa\n2- Atualizar multa\n3- Ver dados da multa\n4- Voltar\n", 1, 4);
-
-    switch(opcao) {
-      case 1:
-        MultaDAO.removerMulta(multaEncontrada.getCodigoMulta());
-
-        System.out.println("Multa removida com sucesso.");
+    menu:
+    while (true) {
+      int opcao = lerDados.lerIntComLimites("Escolha uma opção:\n1- Excluir multa\n2- Atualizar multa\n3- Ver dados da multa\n4- Voltar\n", 1, 4);
+  
+      switch(opcao) {
+        case 1:
+          MultaDAO.removerMulta(multaEncontrada.getCodigoMulta());
+  
+          System.out.println("Multa removida com sucesso.");
+          break;
+        case 2:
+  
         break;
-      case 2:
-
-      break;
-      case 3:
-
-        break;
-      case 4:
-        exibirMenuGenerico();
-        break;
+        case 3:
+  
+          break;
+        case 4:
+          break menu;
+      }
     }
+
+    exibirMenuGenerico();
   }
 
 
