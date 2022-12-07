@@ -162,7 +162,7 @@ public class Menu {
   
         break;
         case 3:
-  
+          System.out.println(multaEncontrada);
           break;
         case 4:
           break menu;
