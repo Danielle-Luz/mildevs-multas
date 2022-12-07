@@ -45,9 +45,7 @@ public class Menu {
         criarCondutor();
         break;
       case 2:
-        
-
-
+        exibirMenuCondutorConsulta();
         break;
       case 3:
         exibirMenuGenerico();
@@ -65,7 +63,7 @@ public class Menu {
         criarMulta();
         break;
       case 2:
-
+        exibirMenuMultaConsulta();
         break;
       case 3:
         exibirMenuGenerico();
@@ -83,7 +81,7 @@ public class Menu {
         criarVeiculo();
         break;
       case 2:
-
+        exibirMenuVeiculoConsulta();
         break;
       case 3:
         exibirMenuGenerico();
@@ -99,7 +97,9 @@ public class Menu {
 
     switch(opcao) {
       case 1:
+        CondutorDAO.removerCondutor(condutorEncontrado.getNumeroCnh());
 
+        System.out.println("Condutor removido com sucesso.");
         break;
       case 2:
 
@@ -120,7 +120,9 @@ public class Menu {
 
     switch(opcao) {
       case 1:
+        VeiculoDAO.removerVeiculo(veiculoEncontrado.getPlaca());
 
+        System.out.println("Veículo removido com sucesso.");
         break;
       case 2:
 
@@ -141,7 +143,9 @@ public class Menu {
 
     switch(opcao) {
       case 1:
+        MultaDAO.removerMulta(multaEncontrada.getCodigoMulta());
 
+        System.out.println("Multa removida com sucesso.");
         break;
       case 2:
 
