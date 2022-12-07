@@ -84,7 +84,7 @@ public class Veiculo {
 
     @Override
     public String toString() {
-        String dados = String.format("");
+        String dados = String.format("Placa: %s\nAno: %d\nModelo: %s\nMarca: %s\nDono do veículo:\n%s", placa, ano, modelo, marca, condutor.toString());
 
         return dados;
     }
