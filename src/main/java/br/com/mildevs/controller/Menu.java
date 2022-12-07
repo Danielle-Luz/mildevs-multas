@@ -45,7 +45,9 @@ public class Menu {
         criarCondutor();
         break;
       case 2:
-        Condutor condutorEncontrado = buscarCondutor(false);
+        
+
+
         break;
       case 3:
         exibirMenuGenerico();
@@ -84,6 +86,70 @@ public class Menu {
 
         break;
       case 3:
+        exibirMenuGenerico();
+        break;
+    }
+  }
+
+
+  public static void exibirMenuCondutorConsulta() {
+    Condutor condutorEncontrado = buscarCondutor();
+
+    int opcao = lerDados.lerIntComLimites("Escolha uma opção:\n1- Excluir condutor\n2- Atualizar condutor\n3- Ver dados do condutor\n4- Voltar\n", 1, 4);
+
+    switch(opcao) {
+      case 1:
+
+        break;
+      case 2:
+
+      break;
+      case 3:
+
+        break;
+      case 4:
+        exibirMenuGenerico();
+        break;
+    }
+  }
+
+  public static void exibirMenuVeiculoConsulta() {
+    Veiculo veiculoEncontrado = buscarVeiculo();
+
+    int opcao = lerDados.lerIntComLimites("Escolha uma opção:\n1- Excluir veículo\n2- Atualizar veículo\n3- Ver dados do veículo\n4- Voltar\n", 1, 4);
+
+    switch(opcao) {
+      case 1:
+
+        break;
+      case 2:
+
+      break;
+      case 3:
+
+        break;
+      case 4:
+        exibirMenuGenerico();
+        break;
+    }
+  }
+
+  public static void exibirMenuMultaConsulta() {
+    Multa multaEncontrada = buscarMulta(true);
+
+    int opcao = lerDados.lerIntComLimites("Escolha uma opção:\n1- Excluir multa\n2- Atualizar multa\n3- Ver dados da multa\n4- Voltar\n", 1, 4);
+
+    switch(opcao) {
+      case 1:
+
+        break;
+      case 2:
+
+      break;
+      case 3:
+
+        break;
+      case 4:
         exibirMenuGenerico();
         break;
     }
