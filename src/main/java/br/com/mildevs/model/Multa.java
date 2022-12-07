@@ -22,14 +22,12 @@ public class Multa {
 
     @Column(nullable = false)
     private int pontuacao;
-
+    
     @JoinColumn(name = "fk_veiculo", referencedColumnName = "placa")
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST, optional = false)
     private Veiculo veiculoMultado;
 
-    public Multa() {
-      
-    }
+    public Multa() {}
 
     public int getCodigoMulta() {
         return codigoMulta;
@@ -61,5 +59,12 @@ public class Multa {
 
     public void setVeiculoMultado(Veiculo veiculoMultado) {
         this.veiculoMultado = veiculoMultado;
+    }
+
+    @Override
+    public String toString() {
+        String dados = String.format("");
+
+        return dados;
     }
 }

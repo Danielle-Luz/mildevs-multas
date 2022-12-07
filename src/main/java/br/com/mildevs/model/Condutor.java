@@ -69,4 +69,11 @@ public class Condutor {
     public void setVeiculos(List<Veiculo> veiculos) {
         this.veiculos = veiculos;
     }
+
+    @Override
+    public String toString() {
+        String dados = String.format("");
+
+        return dados;
+    }
 }

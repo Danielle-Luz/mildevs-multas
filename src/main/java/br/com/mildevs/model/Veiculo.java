@@ -81,4 +81,11 @@ public class Veiculo {
     public void setMultas(List<Multa> multas) {
         this.multas = multas;
     }
+
+    @Override
+    public String toString() {
+        String dados = String.format("");
+
+        return dados;
+    }
 }
