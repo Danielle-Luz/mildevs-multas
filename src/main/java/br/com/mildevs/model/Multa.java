@@ -63,7 +63,7 @@ public class Multa {
 
     @Override
     public String toString() {
-        String dados = String.format("");
+        String dados = String.format("Código da multa: %d\nValor: %.2f\nPontuação: %d\nVeículo multado:\n%s", codigoMulta, valor, pontuacao, veiculoMultado.toString());
 
         return dados;
     }
