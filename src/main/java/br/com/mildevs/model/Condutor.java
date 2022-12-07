@@ -70,4 +70,11 @@ public class Condutor {
     public void setVeiculos(List<Veiculo> veiculos) {
         this.veiculos = veiculos;
     }
+
+    @Override
+    public String toString() {
+        String dados = String.format("CNH: %d\nData de emissão: %s\nOrgão emissor: %s\nPontuação da CNH: %d", numeroCnh, dataEmissaoCnh.toString(), orgaoEmissor, pontuacao);
+
+        return dados;
+    }
 }

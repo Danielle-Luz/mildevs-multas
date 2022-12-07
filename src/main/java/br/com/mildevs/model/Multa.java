@@ -22,14 +22,12 @@ public class Multa {
 
     @Column(nullable = false)
     private int pontuacao;
-
+    
     @JoinColumn(name = "fk_veiculo", referencedColumnName = "placa")
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     private Veiculo veiculoMultado;
 
-    public Multa() {
-      
-    }
+    public Multa() {}
 
     public int getCodigoMulta() {
         return codigoMulta;
@@ -61,5 +59,12 @@ public class Multa {
 
     public void setVeiculoMultado(Veiculo veiculoMultado) {
         this.veiculoMultado = veiculoMultado;
+    }
+
+    @Override
+    public String toString() {
+        String dados = String.format("Código da multa: %d\nValor: %.2f\nPontuação: %d\nVeículo multado:\n%s", codigoMulta, valor, pontuacao, veiculoMultado.toString());
+
+        return dados;
     }
 }
