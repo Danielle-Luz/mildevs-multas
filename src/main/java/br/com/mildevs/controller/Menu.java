@@ -105,7 +105,7 @@ public class Menu {
 
       break;
       case 3:
-
+        System.out.println(condutorEncontrado);
         break;
       case 4:
         exibirMenuGenerico();
@@ -128,7 +128,7 @@ public class Menu {
 
       break;
       case 3:
-
+        System.out.println(veiculoEncontrado);
         break;
       case 4:
         exibirMenuGenerico();
