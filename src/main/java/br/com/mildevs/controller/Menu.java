@@ -8,12 +8,13 @@ import br.com.mildevs.model.Condutor;
 import br.com.mildevs.model.Multa;
 import br.com.mildevs.model.Veiculo;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 
 public class Menu {
   public static void exibirMenuGenerico() {
     while(true) {
-      String texto = "O que você deseja gerenciar?\n1- Condutor\n2- Multas\n3-Veiculos\n4- Sair";
+      String texto = "O que você deseja gerenciar?\n1- Condutor\n2- Multas\n3-Veiculos\n4- Sair\n";
   
       int opcao = lerDados.lerIntComLimites(texto, 1, 4);
   
@@ -34,7 +35,7 @@ public class Menu {
   }
 
   public static void exibirMenuCondutor() {
-    String texto = "Escolha uma opção:\n1- Inserir condutor\n2- Consultar condutor\n3- Voltar";
+    String texto = "Escolha uma opção:\n1- Inserir condutor\n2- Consultar condutor\n3- Voltar\n";
 
     int opcao = lerDados.lerIntComLimites(texto, 1, 3);
 
@@ -52,7 +53,7 @@ public class Menu {
   }
 
   public static void exibirMenuMulta() {
-    String texto = "Escolha uma opção:\n1- Inserir multa\n2- Consultar multa\n3- Voltar";
+    String texto = "Escolha uma opção:\n1- Inserir multa\n2- Consultar multa\n3- Voltar\n";
 
     int opcao = lerDados.lerIntComLimites(texto, 1, 3);
 
@@ -70,7 +71,7 @@ public class Menu {
   }
 
   public static void exibirMenuVeiculo() {
-    String texto = "Escolha uma opção:\n1- Inserir veículo\n2- Consultar veículo\n3- Voltar";
+    String texto = "Escolha uma opção:\n1- Inserir veículo\n2- Consultar veículo\n3- Voltar\n";
 
     int opcao = lerDados.lerIntComLimites(texto, 1, 3);
 
@@ -137,13 +138,26 @@ public class Menu {
   }
 
 
+  public static LocalDate lerDataEmissaoCnh() {
+    while(true) {
+      try {
+        int dia = lerDados.lerIntComLimites("Dia de emissão da CNH: ", 1, 31);
+        int mes = lerDados.lerIntComLimites("Mês de emissão da CNH: ", 1, 12);
+        int ano = lerDados.lerInt("Ano de emissão da CNH: ");
+
+        LocalDate dataEmissao = LocalDate.of(ano, mes, dia);
+
+        return dataEmissao;
+      } catch(DateTimeException e) {
+        System.out.println("Data inválida");
+      }
+    }
+  }
+
   public static Condutor criarCondutor() {
     int numeroCnh = lerDados.lerInt("Número da CNH: ");
-
-    int dia = lerDados.lerInt("Dia de emissão da CNH: ");
-    int mes = lerDados.lerInt("Mês de emissão da CNH: ");
-    int ano = lerDados.lerInt("Ano de emissão da CNH: ");
-
+    LocalDate dataEmissao = lerDataEmissaoCnh();
+    
     String orgaoEmissor = lerDados.lerString(10, "Orgão emissor da CNH: ");
 
     int pontuacao = lerDados.lerInt("Pontuação atual da CNH: ");
@@ -153,7 +167,7 @@ public class Menu {
     novoCondutor.setNumeroCnh(numeroCnh);
     novoCondutor.setOrgaoEmissor(orgaoEmissor);
     novoCondutor.setPontuacao(pontuacao);
-    novoCondutor.setDataEmissaoCnh(LocalDate.of(ano, mes, dia));
+    novoCondutor.setDataEmissaoCnh(dataEmissao);
 
     System.out.println("Condutor registrado com sucesso.");
 
@@ -172,7 +186,7 @@ public class Menu {
       veiculo = buscarVeiculo(false);
 
       if (veiculo == null) {
-        int opcao = lerDados.lerIntComLimites("Deseja cadastrar um veiculo?\n1- Sim\n2- Não", 1, 2);
+        int opcao = lerDados.lerIntComLimites("Deseja cadastrar um veiculo?\n1- Sim\n2- Não\n", 1, 2);
 
         if (opcao == 1) {
           veiculo = criarVeiculo();
@@ -207,7 +221,7 @@ public class Menu {
       condutor = buscarCondutor(false);
 
       if (condutor == null) {
-        int opcao = lerDados.lerIntComLimites("Deseja cadastrar um condutor?\n1- Sim\n2- Não", 1, 2);
+        int opcao = lerDados.lerIntComLimites("Deseja cadastrar um condutor?\n1- Sim\n2- Não\n", 1, 2);
 
         if (opcao == 1) {
           condutor = criarCondutor();

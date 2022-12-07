@@ -56,7 +56,7 @@ public class lerDados {
       Scanner scan = new Scanner(System.in);
 
       try {
-        System.out.println(mensagem);
+        System.out.print(mensagem);
         
         int valor = scan.nextInt();
 
