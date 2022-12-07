@@ -8,6 +8,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -30,8 +32,7 @@ public class Veiculo {
     private Condutor condutor;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "veiculoMultado")
-    private List<Multa> multas;
-
+    private List<Multa> multas = new ArrayList<>();
     public Veiculo() {}
 
     public String getPlaca() {
