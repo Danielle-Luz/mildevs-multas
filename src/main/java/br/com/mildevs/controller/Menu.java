@@ -45,7 +45,7 @@ public class Menu {
         criarCondutor();
         break;
       case 2:
-
+        Condutor condutorEncontrado = buscarCondutor(false);
         break;
       case 3:
         exibirMenuGenerico();
@@ -90,20 +90,26 @@ public class Menu {
   }
 
 
-  public static Condutor buscarCondutor(boolean buscarEmLoop) {
-    while(true) {
+  public static Condutor buscarCondutor() {
+    Condutor condutor = null;
+
+    while(condutor == null) {
       int cnh = lerDados.lerInt("Número da CNH: ");
 
-      Condutor condutorEncontrado = CondutorDAO.consultarCondutor(cnh);
+      condutor = CondutorDAO.consultarCondutor(cnh);
 
-      if (condutorEncontrado == null) {
+      if (condutor == null) {
         System.out.println("Condutor não encontrado");
 
-        if (buscarEmLoop) continue;
+        int opcao = lerDados.lerIntComLimites("Deseja cadastrar um condutor?\n1- Sim\n2- Não\n", 1, 2);
+
+        if (opcao == 1) {
+          condutor = criarCondutor();
+        }
       }
-      
-      return condutorEncontrado;
     }
+
+    return condutor;
   }
 
   public static Multa buscarMulta(boolean buscarEmLoop) {
@@ -122,20 +128,26 @@ public class Menu {
     }
   }
 
-  public static Veiculo buscarVeiculo(boolean buscarEmLoop) {
-    while(true) {
+  public static Veiculo buscarVeiculo() {
+    Veiculo veiculo = null;
+
+    while(veiculo == null) {
       String placa = lerDados.lerString(7, "Placa do veículo: ");
 
-      Veiculo veiculoEncontrado = VeiculoDAO.consultarVeiculo(placa);
+      veiculo = VeiculoDAO.consultarVeiculo(placa);
 
-      if (veiculoEncontrado == null) {
+      if (veiculo == null) {
         System.out.println("Veículo não encontrado");
 
-        if (buscarEmLoop) continue;
+        int opcao = lerDados.lerIntComLimites("Deseja cadastrar um veiculo?\n1- Sim\n2- Não\n", 1, 2);
+
+        if (opcao == 1) {
+          veiculo = criarVeiculo();
+        }
       }
-      
-      return veiculoEncontrado;
     }
+
+    return veiculo;
   }
 
 
@@ -197,19 +209,7 @@ public class Menu {
     double valor = lerDados.lerDouble("Valor da multa: ");
     int pontuacao = lerDados.lerInt("Pontuação reduzida da CNH: ");
 
-    Veiculo veiculo = null;
-
-    while(veiculo == null) {
-      veiculo = buscarVeiculo(false);
-
-      if (veiculo == null) {
-        int opcao = lerDados.lerIntComLimites("Deseja cadastrar um veiculo?\n1- Sim\n2- Não\n", 1, 2);
-
-        if (opcao == 1) {
-          veiculo = criarVeiculo();
-        }
-      }
-    }
+    Veiculo veiculo = buscarVeiculo();
 
     Multa novaMulta = new Multa();
 
@@ -254,19 +254,7 @@ public class Menu {
     String modelo = lerDados.lerString(30, "Modelo do veículo: ");
     String marca = lerDados.lerString(30, "Marca do veículo: ");
 
-    Condutor condutor = null;
-
-    while(condutor == null) {
-      condutor = buscarCondutor(false);
-
-      if (condutor == null) {
-        int opcao = lerDados.lerIntComLimites("Deseja cadastrar um condutor?\n1- Sim\n2- Não\n", 1, 2);
-
-        if (opcao == 1) {
-          condutor = criarCondutor();
-        }
-      }
-    }
+    Condutor condutor = buscarCondutor();
 
     Veiculo novoVeiculo = new Veiculo();
 
