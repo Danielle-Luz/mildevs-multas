@@ -96,7 +96,7 @@ public class Menu {
     menu:
     while (true) {
       
-      int opcao = lerDados.lerIntComLimites("Escolha uma opção:\n1- Excluir condutor\n2- Atualizar condutor\n3- Ver dados do condutor\n4- Voltar\n", 1, 4);
+      int opcao = lerDados.lerIntComLimites("Escolha uma opção:\n1- Excluir condutor\n2- Atualizar condutor\n3- Ver dados do condutor\n4- Listar veículos\n5- Voltar\n", 1, 5);
   
       switch(opcao) {
         case 1:
@@ -111,7 +111,13 @@ public class Menu {
           System.out.println(condutorEncontrado);
           break;
         case 4:
-        break menu;
+          List<Veiculo> listaVeiculos = condutorEncontrado.getVeiculos();
+
+          for(Veiculo veiculo : listaVeiculos) {
+            System.out.println(veiculo);
+          }
+        case 5:
+          break menu;
       }
     }
 
@@ -123,7 +129,7 @@ public class Menu {
 
     menu:
     while(true) {
-      int opcao = lerDados.lerIntComLimites("Escolha uma opção:\n1- Excluir veículo\n2- Atualizar veículo\n3- Ver dados do veículo\n4- Voltar\n", 1, 4);
+      int opcao = lerDados.lerIntComLimites("Escolha uma opção:\n1- Excluir veículo\n2- Atualizar veículo\n3- Ver dados do veículo\n4- Listar multas do veículo\n5- Voltar\n", 1, 5);
   
       switch(opcao) {
         case 1:
@@ -138,6 +144,12 @@ public class Menu {
           System.out.println(veiculoEncontrado);
           break;
         case 4:
+          List<Multa> listaMultas = VeiculoDAO.exibirMultas(veiculoEncontrado.getPlaca());
+
+          for(Multa multa : listaMultas) {
+            System.out.println(multa);
+          }
+        case 5:
           break menu;
       }
       
