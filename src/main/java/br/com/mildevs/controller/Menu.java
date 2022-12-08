@@ -195,6 +195,8 @@ public class Menu {
           break;
         case 2:
         limparTela();
+        
+        atualizarDadosVeiculo(veiculoEncontrado);
 
         break;
         case 3:
@@ -260,8 +262,8 @@ public class Menu {
     exibirMenuGenerico();
   }
 
-  public static void atualizarDadosCondutor(Condutor condutor) {
 
+  public static void atualizarDadosCondutor(Condutor condutor) {
     menuAtualizacao:
     while(true) {
       int opcao = lerDados.lerIntComLimites("Escolha um dado para atualizar:\n1- Data de emissão da CNH\n2- Orgão emissor da CNH\n3- Pontuação da CNH\n4- Voltar\n", 1, 4);
@@ -294,7 +296,48 @@ public class Menu {
       CondutorDAO.atualizarCondutor(condutor);
 
       System.out.println("Dado atualizado com sucesso.");
+    }
+  }
 
+  public static void atualizarDadosVeiculo(Veiculo veiculo) {
+    menuAtualizacao:
+    while(true) {
+      int opcao = lerDados.lerIntComLimites("Escolha um dado para atualizar:\n1- Ano do veículo\n2- Modelo\n3- Marca\n4- Condutor\n5- Voltar\n", 1, 5);
+      
+      switch (opcao) {
+        case 1:
+          int ano = lerDados.lerInt("Ano do veículo: ");
+
+          veiculo.setAno(ano);
+
+          break;
+        case 2:
+          String modelo = lerDados.lerString(30, "Modelo do veículo: ");
+
+          veiculo.setModelo(modelo);
+          
+          break;
+        case 3:
+          String marca = lerDados.lerString(30, "Marca do veículo: ");
+
+          veiculo.setMarca(marca);
+
+          break;
+        case 4:
+          Condutor condutor = buscarCondutor();
+          
+          veiculo.setCondutor(condutor);
+
+          break;
+        case 5:
+          break menuAtualizacao;
+      }
+
+      if(opcao == 5) exibirMenuVeiculo();
+
+      VeiculoDAO.atualizarVeiculo(veiculo);
+
+      System.out.println("Dado atualizado com sucesso.");
     }
   }
 
