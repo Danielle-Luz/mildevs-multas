@@ -12,17 +12,17 @@
 			<property name="jakarta.persistence.jdbc.driver"
 				value="org.postgresql.Driver" />
 			<property name="jakarta.persistence.jdbc.url"
-				value="jdbc:postgresql://postgres:ngvkVYWYJabDYYXOj8mW@containers-us-west-103.railway.app:6864/railway"/>
+				value="jdbc:postgresql://localhost:5432/postgres"/>
 			<property name="
 				javax.persistence.jdbc.user" value="postgres" />
 			<property name="jakarta.persistence.jdbc.password"
-				value="ngvkVYWYJabDYYXOj8mW" />
-			<property name="hibernate.default_schema" value="railway"/>
+				value="12345" />
+			<property name="hibernate.default_schema" value="public"/>
 			<property name="hibernate.dialect"
 				value="org.hibernate.dialect.PostgreSQLDialect" />
-			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.show_sql" value="false" />
 			<property name="hibernate.format_sql" value="true" />
-			<property name="hibernate.hbm2ddl.auto" value="create" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
 		</properties>
 	</persistence-unit>
 </persistence>
