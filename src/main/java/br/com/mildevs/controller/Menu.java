@@ -146,7 +146,7 @@ public class Menu {
     Condutor condutorEncontrado = buscarCondutor();
 
     menu:
-    while (true) {
+    while (condutorEncontrado != null) {
       int opcao = lerDados.lerIntComLimites("\nEscolha uma opção:\n1- Excluir condutor\n2- Atualizar condutor\n3- Ver dados do condutor\n4- Voltar\n", 1, 4);
   
       switch(opcao) {
@@ -181,7 +181,7 @@ public class Menu {
     Veiculo veiculoEncontrado = buscarVeiculo();
 
     menu:
-    while(true) {
+    while(veiculoEncontrado != null) {
       int opcao = lerDados.lerIntComLimites("\nEscolha uma opção:\n1- Excluir veículo\n2- Atualizar veículo\n3- Ver dados do veículo\n4- Listar multas do veículo\n5- Voltar\n", 1, 5);
   
       switch(opcao) {
@@ -226,54 +226,57 @@ public class Menu {
           break menu;
       }
     }
+
     exibirMenuGenerico();
   }
 
   public static void exibirMenuMultaConsulta() {
-    Multa multaEncontrada = buscarMulta(true);
+    Multa multaEncontrada = buscarMulta();
 
-    menu:
-    while (true) {
-      int opcao = lerDados.lerIntComLimites("\nEscolha uma opção:\n1- Excluir multa\n2- Atualizar multa\n3- Ver dados da multa\n4- Exibir todas as multas\n5- Voltar\n", 1, 5);
+    if(multaEncontrada != null) {
+      menu:
+      while (true) {
+        int opcao = lerDados.lerIntComLimites("\nEscolha uma opção:\n1- Excluir multa\n2- Atualizar multa\n3- Ver dados da multa\n4- Exibir todas as multas\n5- Voltar\n", 1, 5);
+    
+        switch(opcao) {
+          case 1:
+            limparTela();
   
-      switch(opcao) {
-        case 1:
-          limparTela();
-
-          MultaDAO.removerMulta(multaEncontrada.getCodigoMulta());
+            MultaDAO.removerMulta(multaEncontrada.getCodigoMulta());
+    
+            System.out.println("Multa removida com sucesso.");
+            break;
+          case 2:
+            limparTela();
   
-          System.out.println("Multa removida com sucesso.");
-          break;
-        case 2:
-          limparTela();
-
-          atualizarDadosMulta(multaEncontrada);
-
-          break;
-        case 3:
-          limparTela();
-
-          System.out.println(multaEncontrada);
-
-          break;
-        case 4:
-          List<Multa> todasMultas = MultaDAO.exibirTodasAsMultas();
-
-          if (todasMultas.size() == 0) {
-            System.out.println("Não há nenhuma multa registrada.\n");
-          } else {
-            System.out.println("--------------------------");
+            atualizarDadosMulta(multaEncontrada);
   
-            for(Multa multa : todasMultas) {
-              System.out.println(multa);
+            break;
+          case 3:
+            limparTela();
   
+            System.out.println(multaEncontrada);
+  
+            break;
+          case 4:
+            List<Multa> todasMultas = MultaDAO.exibirTodasAsMultas();
+  
+            if (todasMultas.size() == 0) {
+              System.out.println("Não há nenhuma multa registrada.\n");
+            } else {
               System.out.println("--------------------------");
+    
+              for(Multa multa : todasMultas) {
+                System.out.println(multa);
+    
+                System.out.println("--------------------------");
+              }
             }
-          }
-
-          break menu;
-        case 5:
-          break menu;
+  
+            break menu;
+          case 5:
+            break menu;
+        }
       }
     }
 
@@ -437,20 +440,16 @@ public class Menu {
     return condutor;
   }
 
-  public static Multa buscarMulta(boolean buscarEmLoop) {
-    while(true) {
-      int codigoMulta = lerDados.lerInt("Código da multa: ");
+  public static Multa buscarMulta() {
+    int codigoMulta = lerDados.lerInt("Código da multa: ");
 
-      Multa multaEncontrada = MultaDAO.consultarMulta(codigoMulta);
+    Multa multaEncontrada = MultaDAO.consultarMulta(codigoMulta);
 
-      if (multaEncontrada == null) {
-        System.out.println("Multa não encontrada");
-
-        if (buscarEmLoop) continue;
-      }
-      
-      return multaEncontrada;
+    if (multaEncontrada == null) {
+      System.out.println("Multa não encontrada");
     }
+    
+    return multaEncontrada;
   }
 
   public static Veiculo buscarVeiculo() {
