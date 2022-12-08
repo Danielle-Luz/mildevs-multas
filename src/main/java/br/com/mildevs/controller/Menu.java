@@ -336,6 +336,8 @@ public class Menu {
                 5
             );
 
+            String mensagemSucesso = "Dado atualizado com sucesso.";
+
             switch (opcao) {
                 case 1:
                     LocalDate novaData = lerDataEmissaoCnh();
@@ -356,7 +358,13 @@ public class Menu {
 
                     break;
                 case 4:
-                    transferirVeiculo(condutor);
+                    boolean veiculoFoiTransferido = transferirVeiculo(condutor);
+
+                    if(!veiculoFoiTransferido) {
+                      mensagemSucesso = "";
+                    } else {
+                      mensagemSucesso = "Veículo transferido com sucesso.";
+                    }
 
                     break;
                 case 5:
@@ -367,7 +375,7 @@ public class Menu {
 
             CondutorDAO.atualizarCondutor(condutor);
 
-            System.out.println("Dado atualizado com sucesso.");
+            System.out.println(mensagemSucesso);
         }
     }
 
@@ -470,8 +478,10 @@ public class Menu {
         }
     }
 
-    public static void transferirVeiculo(Condutor condutorAntigo) {
+    public static boolean transferirVeiculo(Condutor condutorAntigo) {
+      if(condutorAntigo.getVeiculo() != null) {
         System.out.println("Insira os dados do comprador.");
+        
         Condutor novoCondutor = buscarCondutor();
 
         Veiculo veiculoTransferido = condutorAntigo.getVeiculo();
@@ -479,7 +489,7 @@ public class Menu {
         if (novoCondutor.getNumeroCnh() == condutorAntigo.getNumeroCnh()) {
             System.err.println("O novo condutor já é dono do veículo.");
 
-            return;
+            return false;
         }
 
         if (novoCondutor.getVeiculo() != null) {
@@ -506,7 +516,15 @@ public class Menu {
         CondutorDAO.atualizarCondutor(novoCondutor);
 
         VeiculoDAO.atualizarVeiculo(veiculoTransferido);
+
+        return true;
+      } else {
+        System.out.println("O condutor não possui nenhum veículo para transferir.");
+
+        return false;
+      }
     }
+
 
     public static Condutor buscarCondutor() {
         Condutor condutor = null;
@@ -563,6 +581,7 @@ public class Menu {
 
         return veiculo;
     }
+
 
     public static LocalDate lerDataEmissaoCnh() {
         while (true) {
