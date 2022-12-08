@@ -154,6 +154,8 @@ public class Menu {
           limparTela();
           
           CondutorDAO.removerCondutor(condutorEncontrado.getNumeroCnh());
+
+          condutorEncontrado = null;
   
           System.out.println("Condutor removido com sucesso.");
           break;
@@ -189,6 +191,8 @@ public class Menu {
           limparTela();
 
           VeiculoDAO.removerVeiculo(veiculoEncontrado.getPlaca());
+
+          veiculoEncontrado = null;
   
           System.out.println("Veículo removido com sucesso.");
           break;
@@ -243,6 +247,8 @@ public class Menu {
             limparTela();
   
             MultaDAO.removerMulta(multaEncontrada.getCodigoMulta());
+
+            multaEncontrada = null;
     
             System.out.println("Multa removida com sucesso.");
             break;

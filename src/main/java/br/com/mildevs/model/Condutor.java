@@ -26,7 +26,7 @@ public class Condutor {
     @Column(nullable = false)
     private int pontuacao;
 
-    @OneToMany(mappedBy = "condutor", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "condutor", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<Veiculo> veiculos = new ArrayList<>();
 
     public Condutor() {}
