@@ -143,6 +143,8 @@ public class Menu {
         case 2:
           limparTela();
 
+          atualizarDadosCondutor(condutorEncontrado);
+
           break;
         case 3:
           limparTela();
