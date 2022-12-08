@@ -26,7 +26,7 @@ public class Condutor {
     private int pontuacao;
 
     @OneToOne(mappedBy = "condutor", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
-    private Veiculo veiculo;
+    private Veiculo veiculo = null;
 
     public Condutor() {}
 
@@ -72,7 +72,11 @@ public class Condutor {
 
     @Override
     public String toString() {
-        String dados = String.format("CNH: %d\nData de emissão: %s\nOrgão emissor: %s\nPontuação da CNH: %d\nVeículo:\n%s", numeroCnh, dataEmissaoCnh.toString(), orgaoEmissor, pontuacao, veiculo.toString());
+        String dados = String.format("CNH: %d\nData de emissão: %s\nOrgão emissor: %s\nPontuação da CNH: %d", numeroCnh, dataEmissaoCnh.toString(), orgaoEmissor, pontuacao);
+
+        if(veiculo != null) {
+            dados += "\nVeículo:\n" + veiculo.toString();
+        }
 
         return dados;
     }
