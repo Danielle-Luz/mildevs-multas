@@ -88,4 +88,8 @@ public class CondutorDAO {
 
         entityManager.close();
     }
+
+    public static List<Condutor> exibirTodosCondutores() {
+        
+    }
 }

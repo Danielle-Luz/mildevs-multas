@@ -86,4 +86,8 @@ public class VeiculoDAO {
 
         entityManager.close();
     }
+
+    public static List<Veiculo> exibirTodosVeiculos() {
+        
+    }
 }
