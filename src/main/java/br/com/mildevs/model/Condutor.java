@@ -7,6 +7,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -25,8 +26,8 @@ public class Condutor {
     @Column(nullable = false)
     private int pontuacao;
 
-    @OneToMany(mappedBy = "condutor", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    private List<Veiculo> veiculos;
+    @OneToMany(mappedBy = "condutor", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    private List<Veiculo> veiculos = new ArrayList<>();
 
     public Condutor() {}
 

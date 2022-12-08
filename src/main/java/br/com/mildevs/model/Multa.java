@@ -24,7 +24,7 @@ public class Multa {
     private int pontuacao;
     
     @JoinColumn(name = "fk_veiculo", referencedColumnName = "placa")
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     private Veiculo veiculoMultado;
 
     public Multa() {}
