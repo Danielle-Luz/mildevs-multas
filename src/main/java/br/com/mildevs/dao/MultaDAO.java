@@ -65,4 +65,18 @@ public class MultaDAO {
 
     entityManager.close();
   }
+
+  public static void exibirTodasAsMultas() {
+    EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+    entityManager.getTransaction().begin();
+
+    List<Multa> listaMultas = entityManager.createQuery("SELECT m from Multa m").getResultList();
+
+    entityManager.getTransaction().commit();
+
+    entityManager.close();
+
+    return listaMultas;
+  }
 }

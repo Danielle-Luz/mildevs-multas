@@ -247,6 +247,9 @@ public class Menu {
           break;
         case 2:
           limparTela();
+
+          atualizarDadosMulta(multaEncontrada);
+
           break;
         case 3:
           limparTela();
@@ -368,15 +371,20 @@ public class Menu {
           break;
         case 3:
           Veiculo veiculoEncontrado = buscarVeiculo();
+          Condutor condutorVeiculoEncontrado = veiculoEncontrado.getCondutor();
 
           condutorMultado.setPontuacao(condutorMultado.getPontuacao() + multa.getPontuacao());
+          condutorVeiculoEncontrado.setPontuacao(condutorVeiculoEncontrado.getPontuacao() - multa.getPontuacao());
 
           VeiculoDAO.exibirMultas(veiculoMultado.getPlaca()).remove(multa);
-
-          VeiculoDAO.atualizarVeiculo(veiculoMultado);
-          CondutorDAO.atualizarCondutor(condutorMultado);
+          VeiculoDAO.exibirMultas(veiculoEncontrado.getPlaca()).add(multa);
 
           multa.setVeiculoMultado(veiculoEncontrado);
+
+          CondutorDAO.atualizarCondutor(condutorMultado);
+          CondutorDAO.atualizarCondutor(condutorVeiculoEncontrado);
+          VeiculoDAO.atualizarVeiculo(veiculoMultado);
+          VeiculoDAO.atualizarVeiculo(veiculoEncontrado);
 
           break;
         case 4:
@@ -390,6 +398,7 @@ public class Menu {
       System.out.println("Dado atualizado com sucesso.");
     }
   }
+
 
   public static Condutor buscarCondutor() {
     Condutor condutor = null;
