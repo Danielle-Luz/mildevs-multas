@@ -53,7 +53,8 @@ public class Menu {
     public static void exibirMenuCondutor() {
         limparTela();
 
-        String texto = "Escolha uma opção:\n1- Inserir condutor\n2- Consultar condutor\n3- Voltar\n";
+        String texto =
+            "Escolha uma opção:\n1- Inserir condutor\n2- Consultar condutor\n3- Listar todos os condutores\n4- Voltar\n";
 
         int opcao = lerDados.lerIntComLimites(texto, 1, 3);
 
@@ -69,6 +70,21 @@ public class Menu {
                 exibirMenuCondutorConsulta();
                 break;
             case 3:
+                List<Condutor> condutores = CondutorDAO.exibirTodosCondutores();
+
+                if (condutores.size() == 0) {
+                    System.out.println("Não há nenhum condutor registrado.\n");
+                } else {
+                    System.out.println("--------------------------");
+
+                    for (Condutor condutor : condutores) {
+                        System.out.println(condutor);
+
+                        System.out.println("--------------------------");
+                    }
+                }
+                break;
+            case 4:
                 exibirMenuGenerico();
                 break;
         }
@@ -119,7 +135,8 @@ public class Menu {
     public static void exibirMenuVeiculo() {
         limparTela();
 
-        String texto = "Escolha uma opção:\n1- Inserir veículo\n2- Consultar veículo\n3- Voltar\n";
+        String texto =
+            "Escolha uma opção:\n1- Inserir veículo\n2- Consultar veículo\n3- Listar todos os veículos\n4- Voltar\n";
 
         int opcao = lerDados.lerIntComLimites(texto, 1, 3);
 
@@ -135,12 +152,26 @@ public class Menu {
                 exibirMenuVeiculoConsulta();
                 break;
             case 3:
+                List<Veiculo> veiculos = VeiculoDAO.exibirTodosVeiculos();
+
+                if (veiculos.size() == 0) {
+                    System.out.println("Não há nenhum veículo registrado.\n");
+                } else {
+                    System.out.println("--------------------------");
+
+                    for (Veiculo veiculo : veiculos) {
+                        System.out.println(veiculo);
+
+                        System.out.println("--------------------------");
+                    }
+                }
+                break;
+            case 4:
                 exibirMenuGenerico();
                 break;
         }
     }
 
-    
     public static void exibirMenuCondutorConsulta() {
         Condutor condutorEncontrado = buscarCondutor();
 
@@ -296,7 +327,6 @@ public class Menu {
 
         exibirMenuGenerico();
     }
-
 
     public static void atualizarDadosCondutor(Condutor condutor) {
         menu:while (true) {
@@ -477,7 +507,6 @@ public class Menu {
 
         VeiculoDAO.atualizarVeiculo(veiculoTransferido);
     }
-
 
     public static Condutor buscarCondutor() {
         Condutor condutor = null;
