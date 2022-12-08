@@ -31,7 +31,7 @@ public class Menu {
     limparTela();
 
     while(true) {
-      String texto = "O que você deseja gerenciar?\n1- Condutor\n2- Multas\n3-Veiculos\n4- Sair\n";
+      String texto = "O que você deseja gerenciar?\n1- Condutor\n2- Multas\n3- Veiculos\n4- Sair\n";
   
       int opcao = lerDados.lerIntComLimites(texto, 1, 4);
   
@@ -78,25 +78,43 @@ public class Menu {
   public static void exibirMenuMulta() {
     limparTela();
 
-    String texto = "Escolha uma opção:\n1- Inserir multa\n2- Consultar multa\n3- Voltar\n";
-
-    int opcao = lerDados.lerIntComLimites(texto, 1, 3);
-
-    switch(opcao) {
-      case 1:
-        limparTela();
-
-        criarMulta();
-        break;
-      case 2:
-        limparTela();
-
-        exibirMenuMultaConsulta();
-        break;
-      case 3:
-        exibirMenuGenerico();
-        break;
+    menu:
+    while(true) {
+      String texto = "Escolha uma opção:\n1- Inserir multa\n2- Consultar multa\n3- Exibir todas as multas\n4- Voltar\n";
+  
+      int opcao = lerDados.lerIntComLimites(texto, 1, 4);
+  
+      switch(opcao) {
+        case 1:
+          limparTela();
+  
+          criarMulta();
+          break;
+        case 2:
+          limparTela();
+  
+          exibirMenuMultaConsulta();
+          break;
+        case 3:
+          List<Multa> todasMultas = MultaDAO.exibirTodasAsMultas();
+  
+          if (todasMultas.size() == 0) {
+            System.out.println("Não há nenhuma multa registrada.\n");
+          } else {
+            System.out.println("--------------------------");
+  
+            for(Multa multa : todasMultas) {
+              System.out.println(multa);
+  
+              System.out.println("--------------------------");
+            }
+          }
+          break;
+        case 4:
+          break menu;
+      }
     }
+    exibirMenuGenerico();
   }
 
   public static void exibirMenuVeiculo() {
@@ -129,8 +147,7 @@ public class Menu {
 
     menu:
     while (true) {
-      
-      int opcao = lerDados.lerIntComLimites("\nEscolha uma opção:\n1- Excluir condutor\n2- Atualizar condutor\n3- Ver dados do condutor\n4- Listar veículos\n5- Voltar\n", 1, 5);
+      int opcao = lerDados.lerIntComLimites("\nEscolha uma opção:\n1- Excluir condutor\n2- Atualizar condutor\n3- Ver dados do condutor\n4- Voltar\n", 1, 4);
   
       switch(opcao) {
         case 1:
@@ -153,24 +170,6 @@ public class Menu {
 
           break;
         case 4:
-          limparTela();
-
-          List<Veiculo> listaVeiculos = CondutorDAO.exibirVeiculos(condutorEncontrado.getNumeroCnh());
-
-          if (listaVeiculos.size() == 0) {
-            System.out.println("Esse condutor não possui nenhum veículo registrado.\n");
-          } else {
-            System.out.println("--------------------------");
-  
-            for(Veiculo veiculo : listaVeiculos) {
-              System.out.println(veiculo);
-  
-              System.out.println("--------------------------");
-            }
-          }
-
-          break;
-        case 5:
           break menu;
       }
     }
@@ -235,7 +234,7 @@ public class Menu {
 
     menu:
     while (true) {
-      int opcao = lerDados.lerIntComLimites("\nEscolha uma opção:\n1- Excluir multa\n2- Atualizar multa\n3- Ver dados da multa\n4- Voltar\n", 1, 4);
+      int opcao = lerDados.lerIntComLimites("\nEscolha uma opção:\n1- Excluir multa\n2- Atualizar multa\n3- Ver dados da multa\n4- Exibir todas as multas\n5- Voltar\n", 1, 5);
   
       switch(opcao) {
         case 1:
@@ -258,6 +257,22 @@ public class Menu {
 
           break;
         case 4:
+          List<Multa> todasMultas = MultaDAO.exibirTodasAsMultas();
+
+          if (todasMultas.size() == 0) {
+            System.out.println("Não há nenhuma multa registrada.\n");
+          } else {
+            System.out.println("--------------------------");
+  
+            for(Multa multa : todasMultas) {
+              System.out.println(multa);
+  
+              System.out.println("--------------------------");
+            }
+          }
+
+          break menu;
+        case 5:
           break menu;
       }
     }

@@ -1,5 +1,7 @@
 package br.com.mildevs.dao;
 
+import java.util.List;
+
 import br.com.mildevs.model.Multa;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -66,7 +68,7 @@ public class MultaDAO {
     entityManager.close();
   }
 
-  public static void exibirTodasAsMultas() {
+  public static List<Multa> exibirTodasAsMultas() {
     EntityManager entityManager = entityManagerFactory.createEntityManager();
 
     entityManager.getTransaction().begin();
