@@ -243,7 +243,6 @@ public class Menu {
           break;
         case 2:
           limparTela();
-
           break;
         case 3:
           limparTela();
@@ -257,6 +256,44 @@ public class Menu {
     }
 
     exibirMenuGenerico();
+  }
+
+  public static void atualizarDadosCondutor(Condutor condutor) {
+
+    menuAtualizacao:
+    while(true) {
+      int opcao = lerDados.lerIntComLimites("Escolha um dado para atualizar:\n1- Data de emissão da CNH\n2- Orgão emissor da CNH\n3- Pontuação da CNH\n4- Voltar\n", 1, 4);
+  
+      switch (opcao) {
+        case 1:
+          LocalDate novaData = lerDataEmissaoCnh();
+
+          condutor.setDataEmissaoCnh(novaData);
+
+          break;
+        case 2:
+          String novoOrgaoEmissor = lerDados.lerString(10, "Novo órgão emissor da CNH: ");
+
+          condutor.setOrgaoEmissor(novoOrgaoEmissor);
+          
+          break;
+        case 3:
+          int pontuacao = lerDados.lerInt("Nova pontuação atual da CNH: ");
+
+          condutor.setPontuacao(pontuacao);
+
+          break;
+        case 4:
+          break menuAtualizacao;
+      }
+
+      if(opcao == 4) exibirMenuCondutor();
+
+      CondutorDAO.atualizarCondutor(condutor);
+
+      System.out.println("Dado atualizado com sucesso.");
+
+    }
   }
 
 
