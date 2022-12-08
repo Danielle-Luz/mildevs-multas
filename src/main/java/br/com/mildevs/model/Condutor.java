@@ -5,12 +5,9 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 public class Condutor {
@@ -65,17 +62,17 @@ public class Condutor {
         this.pontuacao = pontuacao;
     }
 
-    public List<Veiculo> getVeiculos() {
-        return veiculos;
+    public Veiculo getVeiculo() {
+        return veiculo;
     }
 
-    public void setVeiculos(List<Veiculo> veiculos) {
-        this.veiculos = veiculos;
+    public void setVeiculo(Veiculo veiculo) {
+        this.veiculo = veiculo;
     }
 
     @Override
     public String toString() {
-        String dados = String.format("CNH: %d\nData de emissão: %s\nOrgão emissor: %s\nPontuação da CNH: %d", numeroCnh, dataEmissaoCnh.toString(), orgaoEmissor, pontuacao);
+        String dados = String.format("CNH: %d\nData de emissão: %s\nOrgão emissor: %s\nPontuação da CNH: %d\nVeículo:\n%s", numeroCnh, dataEmissaoCnh.toString(), orgaoEmissor, pontuacao, veiculo.toString());
 
         return dados;
     }

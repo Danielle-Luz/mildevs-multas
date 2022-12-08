@@ -39,24 +39,6 @@ public class CondutorDAO {
         return condutorEncontrado;
     }
 
-    public static List<Veiculo> exibirVeiculos(int numeroCnh) {
-      EntityManager entityManager = entityManagerFactory.createEntityManager();
-
-      entityManager.getTransaction().begin();
-
-      Condutor condutorEncontrado = entityManager.find(Condutor.class, numeroCnh);
-
-      List<Veiculo> listaCarros = condutorEncontrado.getVeiculos();
-
-      listaCarros.size();
-
-      entityManager.getTransaction().commit();
-
-      entityManager.close();
-
-      return listaCarros;
-    }
-
     public static boolean removerCondutor(int numeroCnh) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 

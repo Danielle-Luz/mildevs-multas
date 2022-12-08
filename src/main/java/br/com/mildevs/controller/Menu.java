@@ -293,7 +293,7 @@ public class Menu {
   public static void atualizarDadosCondutor(Condutor condutor) {
     menu:
     while(true) {
-      int opcao = lerDados.lerIntComLimites("Escolha um dado para atualizar:\n1- Data de emissão da CNH\n2- Orgão emissor da CNH\n3- Pontuação da CNH\n4- Voltar\n", 1, 4);
+      int opcao = lerDados.lerIntComLimites("Escolha um dado para atualizar:\n1- Data de emissão da CNH\n2- Orgão emissor da CNH\n3- Pontuação da CNH\n4- Veículo\n5- Voltar\n", 1, 5);
   
       switch (opcao) {
         case 1:
@@ -315,6 +315,24 @@ public class Menu {
 
           break;
         case 4:
+          Veiculo novoVeiculo = buscarVeiculo();
+          Veiculo veiculoAntigo = condutor.getVeiculo();
+          
+          if(novoVeiculo.getPlaca() == veiculoAntigo.getPlaca()) {
+            System.out.println("O veículo já pertence a esse condutor");
+            
+            break;
+          }
+          
+          Condutor condutorNovoVeiculo = novoVeiculo.getCondutor();
+
+          condutor.setVeiculo(novoVeiculo);
+          condutorNovoVeiculo.setVeiculo(veiculoAntigo);
+
+          CondutorDAO.atualizarCondutor(condutorNovoVeiculo);
+
+          break;
+        case 5:
           break menu;
       }
 
@@ -584,7 +602,19 @@ public class Menu {
     String modelo = lerDados.lerString(30, "Modelo do veículo: ");
     String marca = lerDados.lerString(30, "Marca do veículo: ");
 
-    Condutor condutor = buscarCondutor();
+    Condutor condutor;
+
+    while(true) {
+      condutor = buscarCondutor();
+
+      if(condutor.getVeiculo() != null) {
+        System.err.println("O condutor especificado já possui um veículo. Busque outro condutor.");
+
+        continue;
+      }
+
+      break;
+    }
 
     Veiculo novoVeiculo = new Veiculo();
 
@@ -594,11 +624,7 @@ public class Menu {
     novoVeiculo.setModelo(modelo);
     novoVeiculo.setPlaca(placa);
 
-    List<Veiculo> listaVeiculos = CondutorDAO.exibirVeiculos(condutor.getNumeroCnh());
-
-    listaVeiculos.add(novoVeiculo);
-
-    condutor.setVeiculos(listaVeiculos);
+    condutor.setVeiculo(novoVeiculo);
 
     VeiculoDAO.inserirVeiculo(novoVeiculo);
     
