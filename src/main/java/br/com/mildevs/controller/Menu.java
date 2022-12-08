@@ -264,7 +264,7 @@ public class Menu {
 
 
   public static void atualizarDadosCondutor(Condutor condutor) {
-    menuAtualizacao:
+    menu:
     while(true) {
       int opcao = lerDados.lerIntComLimites("Escolha um dado para atualizar:\n1- Data de emissão da CNH\n2- Orgão emissor da CNH\n3- Pontuação da CNH\n4- Voltar\n", 1, 4);
   
@@ -288,7 +288,7 @@ public class Menu {
 
           break;
         case 4:
-          break menuAtualizacao;
+          break menu;
       }
 
       if(opcao == 4) exibirMenuCondutor();
@@ -300,7 +300,7 @@ public class Menu {
   }
 
   public static void atualizarDadosVeiculo(Veiculo veiculo) {
-    menuAtualizacao:
+    menu:
     while(true) {
       int opcao = lerDados.lerIntComLimites("Escolha um dado para atualizar:\n1- Ano do veículo\n2- Modelo\n3- Marca\n4- Condutor\n5- Voltar\n", 1, 5);
       
@@ -330,7 +330,7 @@ public class Menu {
 
           break;
         case 5:
-          break menuAtualizacao;
+          break menu;
       }
 
       if(opcao == 5) exibirMenuVeiculo();
@@ -341,6 +341,55 @@ public class Menu {
     }
   }
 
+  public static void atualizarDadosMulta(Multa multa) {
+    menu:
+    while(true) {
+      int opcao = lerDados.lerIntComLimites("Escolha um dado para atualizar:\n1- Pontuação removida\n2- Valor\n3- Veiculo multado\n4- Voltar\n", 1, 4);
+
+      Veiculo veiculoMultado = multa.getVeiculoMultado();
+      Condutor condutorMultado = veiculoMultado.getCondutor();
+      
+      switch (opcao) {
+        case 1:
+          int novaPontuacaoReduzida = lerDados.lerInt("Nova pontuação reduzida da CNH: ");
+
+          condutorMultado.setPontuacao(condutorMultado.getPontuacao() + multa.getPontuacao());
+          multa.setPontuacao(novaPontuacaoReduzida);
+          condutorMultado.setPontuacao(condutorMultado.getPontuacao() - novaPontuacaoReduzida);
+
+          CondutorDAO.atualizarCondutor(condutorMultado);
+
+          break;
+        case 2:
+          double novoValor = lerDados.lerDouble("Valor da multa: ");
+
+          multa.setValor(novoValor);
+
+          break;
+        case 3:
+          Veiculo veiculoEncontrado = buscarVeiculo();
+
+          condutorMultado.setPontuacao(condutorMultado.getPontuacao() + multa.getPontuacao());
+
+          VeiculoDAO.exibirMultas(veiculoMultado.getPlaca()).remove(multa);
+
+          VeiculoDAO.atualizarVeiculo(veiculoMultado);
+          CondutorDAO.atualizarCondutor(condutorMultado);
+
+          multa.setVeiculoMultado(veiculoEncontrado);
+
+          break;
+        case 4:
+          break menu;
+      }
+
+      if(opcao == 4) exibirMenuVeiculo();
+
+      MultaDAO.atualizarMulta(multa);
+
+      System.out.println("Dado atualizado com sucesso.");
+    }
+  }
 
   public static Condutor buscarCondutor() {
     Condutor condutor = null;
