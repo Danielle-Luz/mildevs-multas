@@ -90,6 +90,16 @@ public class CondutorDAO {
     }
 
     public static List<Condutor> exibirTodosCondutores() {
-        
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+        entityManager.getTransaction().begin();
+
+        List<Condutor> listaCondutores = entityManager.createQuery("SELECT c FROM Condutor c").getResultList();
+
+        entityManager.getTransaction().commit();
+
+        entityManager.close();
+
+        return listaCondutores;
     }
 }
