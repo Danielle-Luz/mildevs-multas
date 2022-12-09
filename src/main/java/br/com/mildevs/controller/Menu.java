@@ -56,7 +56,7 @@ public class Menu {
         String texto =
             "Escolha uma opção:\n1- Inserir condutor\n2- Consultar condutor\n3- Listar todos os condutores\n4- Voltar\n";
 
-        int opcao = lerDados.lerIntComLimites(texto, 1, 3);
+        int opcao = lerDados.lerIntComLimites(texto, 1, 4);
 
         switch (opcao) {
             case 1:
@@ -138,7 +138,7 @@ public class Menu {
         String texto =
             "Escolha uma opção:\n1- Inserir veículo\n2- Consultar veículo\n3- Listar todos os veículos\n4- Voltar\n";
 
-        int opcao = lerDados.lerIntComLimites(texto, 1, 3);
+        int opcao = lerDados.lerIntComLimites(texto, 1, 4);
 
         switch (opcao) {
             case 1:
