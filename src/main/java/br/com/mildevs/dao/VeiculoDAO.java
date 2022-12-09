@@ -86,4 +86,18 @@ public class VeiculoDAO {
 
         entityManager.close();
     }
+
+    public static List<Veiculo> exibirTodosVeiculos() {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+        entityManager.getTransaction().begin();
+
+        List<Veiculo> listaVeiculos = entityManager.createQuery("SELECT v from Veiculo v").getResultList();
+
+        entityManager.getTransaction().commit();
+
+        entityManager.close();
+
+        return listaVeiculos;
+    }
 }
